@@ -2194,7 +2194,10 @@ table.table.table-striped,.table-bordered,.bs-docs-example {
 .contact{
 	padding:5em 0;
 }
-.contact-form input[type="text"],.contact-form input[type="email"],textarea{
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="password"],
+textarea{
     margin: .5em 0;
     padding: .7em 1em;
     font-size: .9em;
@@ -3036,5 +3039,15 @@ h3.title-txt {
 }
 }
 
+.login-view-container {
+	padding: 100px 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+.login-menssage {
+	color: #fff;
+}
 
 /*--responsive--*/
