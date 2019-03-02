@@ -38,9 +38,13 @@ class MuraldisciplinasModel extends MainModel{
                         $resultquery->data_seek( $j );
         
                         $linha = $resultquery->fetch_array(MYSQLI_NUM);
-
+                            
+                            $title = str_split($linha[1], 20);
+                            if( isset($title[1]) )
+                                $title[0] = $title[0] . "...";
+                            
                             $this->listaDisciplinas[$i][$j]["disciplinaId"] = utf8_encode ($linha[0]);
-                            $this->listaDisciplinas[$i][$j]["disciplinaNome"] = utf8_encode ($linha[1]);
+                            $this->listaDisciplinas[$i][$j]["disciplinaNome"] = utf8_encode ($title[0]);
                 }
 
 			}

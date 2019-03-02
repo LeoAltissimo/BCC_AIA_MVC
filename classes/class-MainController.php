@@ -18,7 +18,6 @@ class MainController extends UserLogin
 	public function __construct ( $parametros = array() ) {
 	
 		$this->db = new CoreDB();
-		$this->phpass = new PasswordHash(8, false);
 		$this->parametros = $parametros;
 		$this->check_userlogin();
 		

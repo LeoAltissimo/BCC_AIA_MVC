@@ -21,7 +21,7 @@ class SobreModel extends MainModel{
 
 	public function getSobre(){
 
-		$query ="SELECT curso.cursoDescricao FROM curso WHERE curso.cursoId='1'";
+		$query ="SELECT curso.cursoDescricao FROM curso WHERE curso.cursoId='2'";
 
 		$queryResult = $this->db->query( $query );
 

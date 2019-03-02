@@ -2468,6 +2468,20 @@ h3.subheading-w3-agile {
 }
 }
 
+.diciplinasContainer {
+	display: flex;
+    flex-wrap: wrap;
+    background-color: #1e3953;
+}
+.diciplinasContainer a {
+	color: #fff;
+	transition: color .3s;
+}
+.diciplinasContainer a:hover {
+	color: #93c83f;
+}
+
+
 @media(max-width:800px) {
 	.slider_banner_info_w3ls h4 {
 		font-size: 3em;

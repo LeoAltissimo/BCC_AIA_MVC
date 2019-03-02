@@ -31,7 +31,7 @@
     
     protected function getSobre(){
 
-        $query = "SELECT cursoDescricao FROM curso WHERE cursoId='1' ";
+        $query = "SELECT cursoDescricao FROM curso WHERE cursoId='2' ";
         $result = $this->db->query( $query );
 
         if( $result ){
@@ -49,7 +49,7 @@
         $query = "SELECT enderecoCursoRua, enderecoCursoNumero, 
                          enderecoCursoBairro, enderecoCursoCidade, 
                          enderecoCursoEstado, enderecoCursoCep  
-                  FROM enderecocurso WHERE cursoId='1' ";
+                  FROM enderecocurso WHERE cursoId='2' ";
         
         $result = $this->db->query( $query );
 
@@ -69,7 +69,7 @@
 
     protected function getContato(){
 
-        $query = "SELECT telCursoTel FROM telcurso WHERE cursoId='1' ";
+        $query = "SELECT telCursoTel FROM telcurso WHERE cursoId='2' ";
         $result = $this->db->query( $query );
 
         if( $result ){
@@ -83,7 +83,7 @@
 
     protected function getEmail(){
 
-        $query = "SELECT emailCursoEmail FROM emailCurso WHERE cursoId='1' ";
+        $query = "SELECT emailCursoEmail FROM emailCurso WHERE cursoId='2' ";
         $result = $this->db->query( $query );
 
         if( $result ){

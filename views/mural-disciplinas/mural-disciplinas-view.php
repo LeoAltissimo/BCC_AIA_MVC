@@ -9,7 +9,7 @@ if ( ! defined('ABSPATH')) exit;
 <div class="disciplinas">
 		<div class="container">
 			<h3 class="title-txt"><span>D</span>isciplinas</h3>
-            
+        <div class="diciplinasContainer">
         <?php
         for( $i = 1 ; $i < count( $modeloDisciplinas->listaDisciplinas); $i++ ){ 
             if( isset($modeloDisciplinas->listaDisciplinas[$i]) ){
@@ -33,6 +33,7 @@ if ( ! defined('ABSPATH')) exit;
             </div>
         
         <?php } } ?>
+        </div>
         <div class="clearfix"> </div>
 	</div>
 </div>
