@@ -19,16 +19,11 @@ class AdminController extends MainController
 		$this->title = 'DashBoard';
 		
 		$parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
-	
-		$modeloMenu =   $this->load_model('menu/menu-model');
-        $modelFooter       = $this->load_model('footer/footer-model');
 		
 		/** Carrega os arquivos do view **/
-        require ABSPATH . '/views/_includes/header.php';
+        require ABSPATH . '/views/admin/_includes/header.php';
 
-        require ABSPATH . '/views/_includes/menu.php';
-
-        require ABSPATH . '/views/_includes/footer.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
 		
     }
 

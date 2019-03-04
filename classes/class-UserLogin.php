@@ -146,7 +146,7 @@ class UserLogin
 			$this->logged_in = true;
 			$this->userdata = $_SESSION['userdata'];
 			
-			if ( isset( $_SESSION['goto_url'] ) ) {l
+			if ( isset( $_SESSION['goto_url'] ) ) {
 				$goto_url = urldecode( $_SESSION['goto_url'] );
 
 				unset( $_SESSION['goto_url'] );
