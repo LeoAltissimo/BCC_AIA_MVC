@@ -28,7 +28,8 @@
 	</script>
 	<!-- // Meta Tags -->
 	<link href="<?php echo HOME_URI;?>/views/_css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="<?php echo HOME_URI;?>/views/_css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="<?php echo HOME_URI;?>/views/_css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="<?php echo HOME_URI;?>/views/_css/swipebox.css" rel="stylesheet" >
 	<!--testimonial flexslider-->
 	<link href="<?php echo HOME_URI;?>/views/admin/_css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -54,8 +55,8 @@
     <div class="menu-container">
         <ul>
           <li>
-            <a class="main-menu-item" href="index.html">
-              <i class="nav-icon icon-speedometer"></i> Dashboard
+            <a class="main-menu-item" href='<?php echo HOME_URI . '/admin/professores/';?>'>
+            <i class="fas fa-chalkboard-teacher"></i></i> Professores
             </a>
           </li>
           <li>
@@ -71,10 +72,3 @@
         </ul>
     </div>
     <main class="main">
-
-    <section class="dash-card">
-      <div class="header-container">
-        <h1><span class="first-letter">T</span>este</h1>
-      </div>
-
-    </section>

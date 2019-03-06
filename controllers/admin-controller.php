@@ -49,4 +49,53 @@ class AdminController extends MainController
 
         require ABSPATH . '/views/_includes/footer.php';
     }
+
+    //Carrega a página "/views/amdmin/professores.php"
+    public function professores() {
+
+        // Verifica se o usuário está logado
+        if ( ! $this->logged_in ) {
+            $this->logout();
+            $this->login();
+            return;
+        }
+
+        $this->title = 'Professores';
+        
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+
+        $modeloProfessores = $this->load_model('muralprofessores/muralprofessores-model');
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/admin/_includes/header.php';
+        require ABSPATH . '/views/admin/lista-professores/lista-professores-view.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
+        
+    }
+
+    //Carrega a página "/views/amdmin/professorEdit/id.php"
+    public function professorEdit() {
+
+        // Verifica se o usuário está logado
+        if ( ! $this->logged_in ) {
+            $this->logout();
+            $this->login();
+            return;
+        }
+
+        if( $_POST ){
+            
+        } 
+
+        $this->title = 'Professores';
+        
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+
+        $modeloDocente = $this->load_model('docente/docente-model');
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/admin/_includes/header.php';
+        require ABSPATH . '/views/admin/edit-professor/edit-professor-view.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
+    }
 }
