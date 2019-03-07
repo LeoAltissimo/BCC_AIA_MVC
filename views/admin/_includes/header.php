@@ -16,7 +16,7 @@
 	<!-- Meta Tags -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
 	<script type="application/x-javascript">
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -47,7 +47,7 @@
     <img class="navbar-brand-full" alt='Logo Ciência da Computação' src='<?php echo HOME_URI;?>/views/_images/logo.jpg' width="130">
     </a>
     <a class="navbar-toggler sidebar-toggler d-md-down-none" href="#">
-      <i class="fa fa-lock"></i> Logout
+      <i class="fas fa-sign-out-alt"></i> Logout
     </a>
   </header>
 

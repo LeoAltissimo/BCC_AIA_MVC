@@ -75,23 +75,41 @@ class AdminController extends MainController
 
     //Carrega a página "/views/amdmin/professorEdit/id.php"
     public function professorEdit() {
-
-        // Verifica se o usuário está logado
         if ( ! $this->logged_in ) {
             $this->logout();
             $this->login();
             return;
         }
 
-        if( $_POST ){
-            
-        } 
-
         $this->title = 'Professores';
         
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
 
         $modeloDocente = $this->load_model('docente/docente-model');
+
+        if( $_POST ) {
+            $nome_final = null;
+            if( $_FILES ) {
+                $_UP['pasta'] = './views/_images/';
+                $_UP['tamanho'] = 1024*1024*100; //5mb
+                $_UP['extensoes'] = array('jpg');
+
+                //Faz a verificação da extensao do arquivo
+                $extensao = explode('.', $_FILES['arquivo']['name']);
+                if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                    echo "ERROOOOUUU";
+                } else if ($_UP['tamanho'] < $_FILES['arquivo']['size']){
+                    echo "ERROOOOUUU";
+                } else {
+                    $nome_final = time().'.jpg';
+                    move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta']. $nome_final);
+                }
+            }
+
+            $modeloDocente->postProfessor( $_POST, $nome_final );
+            $this->professores();
+            return;
+        } 
         
         /** Carrega os arquivos do view **/
         require ABSPATH . '/views/admin/_includes/header.php';

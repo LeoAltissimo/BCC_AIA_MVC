@@ -12,11 +12,11 @@
         <?php foreach( $modeloProfessores->listaProfessores as $value ){ ?>
             <li class="professor-item">
                 <div class="prof-container">
-                    <img class="prof-thumb" src="<?php echo HOME_URI . "/views/_images/" . $value['professorTumb'] . ".jpg"; ?>" alt="">
+                    <img class="prof-thumb" src="<?php echo HOME_URI . "/views/_images/" . $value['professorTumb']; ?>" alt="">
                     <p><?php echo $value['professorTitulacao'] . " " . $value['professorNome']; ?></p>
                 </div>
                 <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/professorEdit/' . $value["professorId"] . "'>" ?>
-                    </i> Editar
+                    <i class="fas fa-pen"></i> Editar
                 </a>
             </li>
         <?php } ?>    

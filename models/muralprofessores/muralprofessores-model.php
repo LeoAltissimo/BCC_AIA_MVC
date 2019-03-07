@@ -34,7 +34,7 @@
                 
 				foreach ($linha as $key => $value) {
 					if( is_string( $value ) )
-						$this->listaProfessores[$i]["$key"] = utf8_encode ($value);
+						$this->listaProfessores[$i]["$key"] = $value;
 					else
 						$this->listaProfessores[$i]["$key"] = $value;
                 }

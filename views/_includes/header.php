@@ -28,6 +28,7 @@
 	</script>
 	<!-- // Meta Tags -->
 	<link href="<?php echo HOME_URI;?>/views/_css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="<?php echo HOME_URI;?>/views/_css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="<?php echo HOME_URI;?>/views/_css/flexslider.css" rel="stylesheet" type="text/css" media="screen" property="" />
 	<link href="<?php echo HOME_URI;?>/views/_css/swipebox.css" rel="stylesheet" >

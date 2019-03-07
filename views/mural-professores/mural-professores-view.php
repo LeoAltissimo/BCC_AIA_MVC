@@ -15,7 +15,7 @@ if ( ! defined('ABSPATH')) exit;
             ?>
                 <div class="col-md-3 col-sm-6 thumbnail team-w3agile">
 				<?php echo  "<a href='" .HOME_URI. '/docente/index/' . $value["professorId"] . "'>" ?>
-					<img src=" <?php echo  HOME_URI. '/views/_images/' . $value["professorTumb"] . '.jpg' ?> " class="img-responsive" alt="">
+					<img src=" <?php echo  HOME_URI. '/views/_images/' . $value["professorTumb"]?> " class="img-responsive" alt="">
 				</a>
 					<div class="team-info">
 						<div class="caption">

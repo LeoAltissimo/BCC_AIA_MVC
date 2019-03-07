@@ -185,6 +185,11 @@ ul {
   margin-bottom: 15px;
 }
 
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .prof-input-text {
   font-size: 12pt;
   border: none;
@@ -221,4 +226,39 @@ ul {
   text-align: center;
   text-decoration: none;
   background: #93c83f;
+}
+
+input[type=file] {
+  outline: 0;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.label {
+  width: 120px;
+  border: 2px dashed #1e3953;
+  border-radius: 5px;
+  display: block;
+  padding: 1.2em 1.2em 0 1.2em;
+  transition: border 300ms ease;
+  cursor: pointer;
+  text-align: center;
+}
+.label i {
+  display: block;
+  font-size: 42px;
+  padding-bottom: 16px;
+}
+.label i,
+.label .title {
+  color: #1e3953;
+  transition: 200ms color;
+}
+.label:hover {
+  border: 2px solid #93c83f;
+}
+.label:hover i,
+.label:hover .title {
+  color: #93c83f;
 }

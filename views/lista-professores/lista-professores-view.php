@@ -22,7 +22,7 @@ if( $modeloListaDocentes->listaProfessores){
 				<p class="para1"><?php echo substr( $value['professorApresentacao'], 0 , 300); ?></p>
 			</div>
 			<div class="col-md-3 aboutright1">
-				<img src="<?php echo HOME_URI . "/views/_images/" . $value['professorTumb'] . ".jpg"; ?>" class="img-responsive" alt="">
+				<img src="<?php echo HOME_URI . "/views/_images/" . $value['professorTumb']; ?>" class="img-responsive" alt="">
 			</div>
 			<div class="clearfix"></div>
         </div>
