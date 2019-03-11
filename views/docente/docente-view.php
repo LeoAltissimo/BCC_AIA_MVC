@@ -7,7 +7,7 @@ if ( ! defined('ABSPATH')) exit;
 <div class="typo">
     <div class='container'>
     <div class=" col-md-3 thumbnail team-w3agile">
-        <img src="<?php echo HOME_URI. '/views/_images/' . $modeloDocente->professor['professorTumb']; ?>.jpg" class="img-responsive" alt="">
+        <img src="<?php echo HOME_URI. '/views/_images/' . $modeloDocente->professor['professorTumb']; ?>" class="img-responsive" alt="">
         <div class="team-info">
             <div class="caption">
                 <h4><?php echo $modeloDocente->professor['professorNome']; ?></h4>
@@ -18,7 +18,7 @@ if ( ! defined('ABSPATH')) exit;
                     <a class="facebook" href="<?php echo $modeloDocente->professor["professorFacebook"]; ?>"><span class="fa fa-facebook"></span></a>
                 <?php } ?> 
                 <?php if( $modeloDocente->professor["professorLattes"] ) { ?>
-                    <a class="facebook" href="<?php echo $modeloDocente->professor["professorLattes"]; ?>"><span class="fa fa-facebook"></span></a>
+                    <a href="<?php echo $modeloDocente->professor["professorLattes"]; ?>">Lattes</a>
                 <?php } ?>    
             </div>
         </div>
@@ -44,7 +44,7 @@ if ( ! defined('ABSPATH')) exit;
             <i class="fa fa-phone" aria-hidden="true"></i>
             <div class="contact-right">
                 <p>Contato</p>
-                <span></span>
+                <span><?php echo $modeloDocente->professor['telProfTel']; ?></span>
             </div>
         </div>
         <?php /* } */ if( $modeloDocente->professor['professorLattes'] ){ ?>

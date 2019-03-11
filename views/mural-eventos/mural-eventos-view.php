@@ -21,7 +21,7 @@ if ( ! defined('ABSPATH')) exit;
 
 								<li>
 									<div class="inner-testimonials-w3ls">
-										<img src="<?php echo HOME_URI. '/views/_images/' . $evento['eventoCapa'] . '.jpg';?>" alt="Capa evento <?php echo $evento['eventoNome'];?>" class="img-responsive" />
+										<img src="<?php echo HOME_URI. '/views/_images/' . $evento['eventoCapa'];?>" alt="Capa evento <?php echo $evento['eventoNome'];?>" class="img-responsive" />
 										<div class="testimonial-info-wthree">
 											<a href='<?php echo HOME_URI . '/evento/index/' . $evento['eventoId'] ;?>'>
 												<h5><?php echo $evento['eventoNome'];?></h5>

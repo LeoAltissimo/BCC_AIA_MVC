@@ -7,7 +7,7 @@ if ( ! defined('ABSPATH')) exit;
 <!--Banner do Evento-->
 <style>
     .banner-evento{
-        background: url(<?php echo HOME_URI. '/views/_images/' . $modeloEvento->evento['eventoCapa']; ?>.jpg) no-repeat 0px 0px;
+        background: url('<?php echo HOME_URI. '/views/_images/' . $modeloEvento->evento['eventoCapa']; ?>') no-repeat 0px 0px;
         background-size: cover;
         background-position: center;
     }

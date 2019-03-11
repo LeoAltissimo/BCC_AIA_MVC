@@ -1469,7 +1469,6 @@ h3.subheading-w3-agile {
 
 .w3ls-social-icons a {
 	background: #93c83f;
-	width: 30px;
 	height: 30px;
 	margin-left: 1em;
 	color: #fff;
@@ -1477,6 +1476,7 @@ h3.subheading-w3-agile {
 	display: inline-block;
 	text-align: center;
 	transition: 0.5s all;
+	padding: 2px 5px;
 	-webkit-transition: 0.5s all;
 	-o-transition: 0.5s all;
 	-ms-transition: 0.5s all;

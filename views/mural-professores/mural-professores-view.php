@@ -27,7 +27,7 @@ if ( ! defined('ABSPATH')) exit;
                                 <a class="facebook" href="<?php echo $value["professorFacebook"]; ?>"><span class="fa fa-facebook"></span></a>
                             <?php } ?> 
                             <?php if( $value["professorLattes"] ) { ?>
-                                <a class="facebook" href="<?php echo $value["professorLattes"]; ?>"><span class="fa fa-facebook"></span></a>
+                                <a class="facebook" href="<?php echo $value["professorLattes"]; ?>">Lattes</a>
                             <?php } ?>    
 						</div>
 					</div>

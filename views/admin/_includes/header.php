@@ -60,13 +60,13 @@
             </a>
           </li>
           <li>
-            <a class="main-menu-item" href="index.html">
-              <i class="nav-icon icon-speedometer"></i> Dashboard
+            <a class="main-menu-item" href='<?php echo HOME_URI . '/admin/eventos/';?>'>
+            <i class="far fa-calendar-check"></i> Eventos
             </a>
           </li>
           <li>
             <a class="main-menu-item" href="index.html">
-              <i class="nav-icon icon-speedometer"></i> Dashboard
+            <i class="fas fa-book"></i> Disciplinas
             </a>
           </li>
         </ul>
