@@ -64,7 +64,7 @@ class EventoModel extends MainModel{
 
             foreach( $linha as $key => $value ){
                 if(  is_string( $value ) )
-                    $this->evento["$key"] = utf8_encode( $value );
+                    $this->evento["$key"] = $value;
                 else
                     $this->evento["$key"] = $value;
             }
@@ -87,7 +87,7 @@ class EventoModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->endereco["$key"] = utf8_encode( $value );
+                        $this->endereco["$key"] = $value;
                     else
                         $this->endereco["$key"] = $value;
                 }
@@ -118,7 +118,7 @@ class EventoModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->professorOrganizador["$key"] = utf8_encode( $value );
+                        $this->professorOrganizador["$key"] = $value;
                     else
                         $this->professorOrganizador["$key"] = $value;
                 }
@@ -131,7 +131,7 @@ class EventoModel extends MainModel{
 
     protected function getAcontecimentos(){
 
-        $query = "SELECT * FROM acontecimento WHERE acontecimento.eventoId='" . $this->evento['eventoId'] . "' ORDER BY acontecimento.acontecimentoData";
+        $query = "SELECT * FROM acontecimento WHERE acontecimento.eventoId='" . $this->evento['eventoId'] . "'";
         $resultquery = $this->db->query( $query );
 
 		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
@@ -143,7 +143,7 @@ class EventoModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->acontecimentos[$i]["$key"] = utf8_encode( $value );
+                        $this->acontecimentos[$i]["$key"] = $value;
                     else
                         $this->acontecimentos[$i]["$key"] = $value;
                 }
@@ -169,7 +169,7 @@ class EventoModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->trabalhos[$i]["$key"] = utf8_encode( $value );
+                        $this->trabalhos[$i]["$key"] = $value;
                     else
                         $this->trabalhos[$i]["$key"] = $value;
                 }
@@ -195,7 +195,7 @@ class EventoModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->comissoes[$i]["$key"] = utf8_encode( $value );
+                        $this->comissoes[$i]["$key"] = $value;
                     else
                         $this->comissoes[$i]["$key"] = $value;
                 }
@@ -206,6 +206,65 @@ class EventoModel extends MainModel{
         else
             return false;
     }
+
+    public function getComissao($id){
+        $intermed = array();
+        $query = 'SELECT * FROM comissao WHERE comissao.eventoId="' . $this->evento['eventoId'] . '"AND comissao.comissaoId="' . $id . '"';
+        $resultquery = $this->db->query( $query );
+
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            $resultquery->data_seek( 0 );
+            $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+            foreach( $linha as $key => $value ){
+                    $intermed["$key"] = $value;
+            }
+                
+            return $intermed;
+        }   
+        else
+            return false;
+    }
+
+    public function getAcontecimento($id){
+        $intermed = array();
+        $query = 'SELECT * FROM acontecimento WHERE acontecimento.eventoId="' . $this->evento['eventoId'] . '"AND acontecimento.acontecimentoId="' . $id . '"';
+        $resultquery = $this->db->query( $query );
+
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            $resultquery->data_seek( 0 );
+            $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+            foreach( $linha as $key => $value ){
+                    $intermed["$key"] = $value;
+            }
+                
+            return $intermed;
+        }   
+        else
+            return false;
+    }
+
+    public function getTrabalho($id){
+        $intermed = array();
+        $query = 'SELECT * FROM trabalho WHERE trabalho.eventoId="' . $this->evento['eventoId'] . '"AND trabalho.trabalhoId="' . $id . '"';
+        $resultquery = $this->db->query( $query );
+
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            $resultquery->data_seek( 0 );
+            $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+            foreach( $linha as $key => $value ){
+                    $intermed["$key"] = $value;
+                    echo $key . " " . $value . "   ";
+            }
+                
+            return $intermed;
+        }   
+        else
+            return false;
+    }
+
 
     protected function getProfList() {
         
@@ -219,7 +278,7 @@ class EventoModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->profList[$i]["$key"] = utf8_encode( $value );
+                        $this->profList[$i]["$key"] = $value;
                     else
                         $this->profList[$i]["$key"] = $value;
                 }
@@ -256,21 +315,23 @@ class EventoModel extends MainModel{
 
 
         if( $params["eventoId"] !== 'null' ) {
-            // $query = "UPDATE professor SET professorNome=".$params["nome"]
-            //                              .", professorFacebook=".$params["facebook"]
-            //                              .", professorLattes=".$params["lattes"]
-            //                              .", professorApresentacao=".$params["apresentacao"]
-            //                              .", professorTitulacao=".$params["titulacao"]
-            //                              ." WHERE professorId=".$params["professorId"];
-            // $this->db->query( $query );
+            $query = "UPDATE evento SET eventoNome=".$params["nome"]
+                                         .", eventoApresentacao=".$params["apresentacao"]
+                                         .", eventoInicio=".$params["date-i"]
+                                         .", eventoFinal=".$params["date-f"]
+                                         .", eventoRegulamento=".$params["regulamento"]
+                                         .", eventoProfOrganizador=".$params["prof-org"]
+                                         .", eventoCapa=".$nomeArquivo
+                                         ." WHERE eventoId=".$params["eventoId"];
+            $this->db->query( $query );
 
-            // $query2 = "UPDATE emailprof SET emailProfEmail=".$params["email"]
-            //                     ." WHERE professorId=".$params["professorId"];
-            // $this->db->query( $query2 );
+            $query2 = "UPDATE eventoemail SET eventoemailEmail=".$params["email"]
+                                ." WHERE eventoId=".$params["eventoId"];
+            $this->db->query( $query2 );
 
-            // $query3 = "UPDATE telprof SET telProfTel=".$params["tel"]
-            //                     ." WHERE professorId=".$params["professorId"];
-            // $this->db->query( $query3 );
+            $query3 = "UPDATE eventotel SET eventotelTEl=".$params["telefone"]
+                                ." WHERE eventoId=".$params["eventoId"];
+            $this->db->query( $query3 );
 
         } else {
             $query = "INSERT INTO evento ( `eventoId`, `cursoId`, `eventoNome`, 
@@ -330,25 +391,115 @@ class EventoModel extends MainModel{
         $params["integranes"] = $params["integranes"] ? "'".$params["integranes"]."'" : 'null';
 
         if( $params["comissaoId"] !== 'null' ) {
-            // $query = "UPDATE professor SET professorNome=".$params["nome"]
-            //                              .", professorFacebook=".$params["facebook"]
-            //                              .", professorLattes=".$params["lattes"]
-            //                              .", professorApresentacao=".$params["apresentacao"]
-            //                              .", professorTitulacao=".$params["titulacao"]
-            //                              ." WHERE professorId=".$params["professorId"];
-            // $this->db->query( $query );
-
-            // $query2 = "UPDATE emailprof SET emailProfEmail=".$params["email"]
-            //                     ." WHERE professorId=".$params["professorId"];
-            // $this->db->query( $query2 );
-
-            // $query3 = "UPDATE telprof SET telProfTel=".$params["tel"]
-            //                     ." WHERE professorId=".$params["professorId"];
-            // $this->db->query( $query3 );
-
+            $query = "UPDATE comissao SET comissaoIntegrantes=".$params["integranes"]
+                                         .", comissaoRotulo=".$params["rotulo"]
+                                         ." WHERE comissaoId=".$params["comissaoId"];
+            $this->db->query( $query );
         } else {
             $query = "INSERT INTO comissao ( `comissaoId`, `eventoId`, `comissaoRotulo`, `comissaoIntegrantes`)
                 VALUES( null," . $params['eventoId'] .",". $params['rotulo'] .",". $params['integranes'] .")";
+
+            $this->db->query( $query );
+        }
+    }
+
+    public function postEventoAcontecimento($params = null) {
+        if( !$params )
+            return false;
+
+        $params["eventoId"] =       $params["eventoId"] ? "'".$params["eventoId"]."'" : 'null';
+        $params["acontecimentoId"]= $params["acontecimentoId"] ? "'".$params["acontecimentoId"]."'" : 'null';
+        $params["nome"] =           $params["nome"] ? "'".$params["nome"]."'" : 'null';
+        $params["data"] =           $params["data"] ? "'".$params["data"]."'" : 'null';
+        $params["inicio"] =         $params["inicio"] ? "'".$params["inicio"]."'" : 'null';
+        $params["termino"] =        $params["termino"] ? "'".$params["termino"]."'" : 'null';
+        $params["local"] =          $params["local"] ? "'".$params["local"]."'" : 'null';
+        $params["ministrante"] =    $params["ministrante"] ? "'".$params["ministrante"]."'" : 'null';
+        $params["tipo"] =           $params["tipo"] ? "'".$params["tipo"]."'" : 'null';
+        $params["vagas"] =          $params["vagas"] ? "'".$params["vagas"]."'" : 'null';
+        $params["apresencacao"] =   $params["apresencacao"] ? "'".$params["apresencacao"]."'" : 'null';
+        $params["obcervacoes"] =    $params["obcervacoes"] ? "'".$params["obcervacoes"]."'" : 'null';
+
+        if( $params["acontecimentoId"] !== 'null' ) {
+            $query = "UPDATE acontecimento SET acontecimentoApresentacao=".$params["apresencacao"]
+                                           .", acontecimentoData="        .$params["data"]
+                                           .", acontecimentoInicio="      .$params["inicio"]
+                                           .", acontecimentoLocal="       .$params["local"]
+                                           .", acontecimentoMinistrante=" .$params["ministrante"]
+                                           .", acontecimentoNome="        .$params["nome"]
+                                           .", acontecimentoObs="         .$params["obcervacoes"]
+                                           .", acontecimentoTermino="     .$params["termino"]
+                                           .", acontecimentoTipo="        .$params["tipo"]
+                                           .", acontecimentoVagas="       .$params["vagas"]
+                                           ." WHERE acontecimentoId="     .$params["acontecimentoId"];
+            $this->db->query( $query );
+        } else {
+            $query = "INSERT INTO acontecimento ( 
+                    `acontecimentoId`, 
+                    `eventoId`, 
+                    `acontecimentoNome`, 
+                    `acontecimentoApresentacao`, 
+                    `acontecimentoInicio`, 
+                    `acontecimentoTermino`, 
+                    `acontecimentoTipo`, 
+                    `acontecimentoLocal`, 
+                    `acontecimentoMinistrante`, 
+                    `acontecimentoVagas`, 
+                    `acontecimentoObs`, 
+                    `acontecimentoData`
+                ) VALUES (" 
+                    . $params['acontecimentoId'] .","
+                    . $params['eventoId'] .","
+                    . $params['nome'] .","
+                    . $params['apresencacao'] .","
+                    . $params['inicio'] .","
+                    . $params['termino'] .","
+                    . $params['tipo'] .","
+                    . $params['local'] .","
+                    . $params['ministrante'] .","
+                    . $params['vagas'] .","
+                    . $params['obcervacoes'] .","
+                    . $params['data']
+                .")";
+
+            echo $query;
+
+            $this->db->query( $query );
+        }
+    }
+
+    public function postEventoTrabalho( $params = null, $nomeArquivo = null ) {
+        if( $params == null )
+            return false;
+
+        $params["trabalhoId"] = $params["trabalhoId"] ? "'".$params["trabalhoId"]."'" : 'null';
+        $params["eventoId"] = $params["eventoId"] ? "'".$params["eventoId"]."'" : 'null';
+        $params["trabalhoTitulo"] = $params["trabalhoTitulo"] ? "'".$params["trabalhoTitulo"]."'" : 'null';
+        $params["trabalhoAutores"] = $params["trabalhoAutores"] ? "'".$params["trabalhoAutores"]."'" : 'null';
+        $nomeArquivo = $nomeArquivo ? "'".$nomeArquivo."'"  : 'null';
+
+        if( $params["trabalhoId"] !== 'null' ) {
+            $query = "UPDATE acontecimento SET trabalhoAutores="     .$params["trabalhoAutores"]
+                                           .", trabalhoTitulo="      .$params["trabalhoTitulo"]
+                                           .", trabalhoCaminho="     .$nomeArquivo
+                                           ." WHERE trabalhoId="     .$params["trabalhoId"];
+            $this->db->query( $query );
+        } else {
+            $query = "INSERT INTO trabalho ( 
+                    `trabalhoId`, 
+                    `eventoId`, 
+                    `trabalhoTitulo`, 
+                    `trabalhoAutores`, 
+                    `trabalhoCaminho`
+                ) VALUES (" 
+                    . $params['trabalhoId'] .","
+                    . $params['eventoId'] .","
+                    . $params['trabalhoTitulo'] .","
+                    . $params['trabalhoAutores'] .","
+                    . $nomeArquivo .","
+                .")";
+
+            echo $query;
 
             $this->db->query( $query );
         }

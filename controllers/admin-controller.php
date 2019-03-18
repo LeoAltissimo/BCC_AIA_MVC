@@ -157,7 +157,7 @@ class AdminController extends MainController
 
         if( $_POST ) {
             $nome_final = null;
-            if( $_FILES ) {
+            if( $_FILES) {
                 $_UP['pasta'] = './views/_images/';
                 $_UP['tamanho'] = 1024*1024*100; //5mb
                 $_UP['extensoes'] = array('jpg');
@@ -173,7 +173,7 @@ class AdminController extends MainController
                     move_uploaded_file($_FILES['capa-evento']['tmp_name'], $_UP['pasta']. $nome_final);
                 }
             }
-
+            
             $modeloEvento->postEvento( $_POST, $nome_final );
             $this->eventos();
             return;
@@ -209,6 +209,9 @@ class AdminController extends MainController
             return;
         }
 
+        if( isset($parametros[1]) )
+            $vals = $modeloEvento->getComissao($parametros[1]);
+
         require ABSPATH . '/views/admin/_includes/header.php';
         require ABSPATH . '/views/admin/edit-evento-comissoes/edit-evento-comissoes-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';
@@ -222,15 +225,24 @@ class AdminController extends MainController
             return;
         }
 
-        $this->title = 'Adicionar Comissão';
+        $this->title = 'Comissão';
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+        $modeloEvento = $this->load_model('evento/evento-model');
+        
+        if( $_POST ){
+            $modeloEvento->postEventoAcontecimento( $_POST );
+            $this->eventos();
+            return;
+        }
 
         if( $parametros == null ) {
             $this->index();
             return;
         }
 
-        $modeloEvento = $this->load_model('evento/evento-model');
+        if( isset($parametros[1]) )
+            $vals = $modeloEvento->getAcontecimento($parametros[1]);
+
         require ABSPATH . '/views/admin/_includes/header.php';
         require ABSPATH . '/views/admin/edit-evento-acontecimento/edit-evento-acontecimento-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';
@@ -244,7 +256,7 @@ class AdminController extends MainController
             return;
         }
 
-        $this->title = 'Adicionar Comissão';
+        $this->title = 'Adicionar Trabalho';
         $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
 
         if( $parametros == null ) {
@@ -253,6 +265,36 @@ class AdminController extends MainController
         }
 
         $modeloEvento = $this->load_model('evento/evento-model');
+
+        if( $_POST ) {
+            $nome_final = null;
+            if( $_FILES) {
+                $_UP['pasta'] = './files/';
+                $_UP['tamanho'] = 1024*1024*100; //5mb
+                $_UP['extensoes'] = array('pdf');
+
+                //Faz a verificação da extensao do arquivo
+                $extensao = explode('.', $_FILES['trabalhoCaminho']['name']);
+                if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                    echo "ERROOOOUUU";
+                } else if ($_UP['tamanho'] < $_FILES['trabalhoCaminho']['size']){
+                    echo "ERROOOOUUU";
+                } else {
+                    $nome_final = time().'.pdf';
+                    move_uploaded_file($_FILES['trabalhoCaminho']['tmp_name'], $_UP['pasta']. $nome_final);
+                }
+            }
+            
+            $modeloEvento->postEventoTrabalho( $_POST, $nome_final );
+            $this->eventos();
+            return;
+        } 
+
+        if( isset($parametros[1]) )
+            $vals = $modeloEvento->getTrabalho($parametros[1]);
+
+        echo $vals["trabalhoTitulo"];
+
         require ABSPATH . '/views/admin/_includes/header.php';
         require ABSPATH . '/views/admin/edit-evento-trabalho/edit-evento-trabalho-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';

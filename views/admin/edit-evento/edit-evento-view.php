@@ -42,8 +42,9 @@ if( $parametros ) {
             <label id="inputBk"  class="label">
                 <i id="inputTumbLabel" class="fas fa-camera"></i>
                 <span class="title">Capa do evento</span>
-                <input id="inputTumb" type="file" name="capa-evento" type="file"/>
+                <input id="inputTumb" type="file" name="capa-evento" type="file" value="<?php echo $vals->evento['eventoCapa'] ?>"/>
             </label>
+            <?php echo $vals->evento['eventoCapa'] ?>
         </div>
         <div class="col-12">
             <textarea class="col-12 prof-input-textarea" name="apresentacao" placeholder="Apresentacao" rows="10">
@@ -88,7 +89,7 @@ if( $parametros ) {
                     <p><?php echo $value['comissaoRotulo']; ?>: </p>
                     <p><small><?php echo $value['comissaoIntegrantes']; ?></small></p>
                 </div>
-                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditComissoes/' . $vals->evento["eventoId"] . "'>" ?>
+                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditComissoes/' . $vals->evento["eventoId"] . "/". $value["comissaoId"] ."'>" ?>
                     <i class="fas fa-pen"></i> Editar
                 </a>
             </li>
@@ -108,9 +109,9 @@ if( $parametros ) {
         <?php if( $vals->acontecimentos ) foreach( $vals->acontecimentos as $value ){ ?>
             <li class="professor-item">
                 <div class="prof-container">
-                    <p><?php echo $value['acontecimentosNome']; ?></p>
+                    <p><?php echo $value['acontecimentoNome']; ?></p>
                 </div>
-                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditAcontecimento/' . $vals->evento["eventoId"] . "'>" ?>
+                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditAcontecimento/' . $vals->evento["eventoId"] . "/". $value["acontecimentoId"] ."'>" ?>
                     <i class="fas fa-pen"></i> Editar
                 </a>
             </li>
@@ -130,9 +131,9 @@ if( $parametros ) {
         <?php if( $vals->trabalhos ) foreach( $vals->trabalhos as $value ){ ?>
             <li class="professor-item">
                 <div class="prof-container">
-                    <p><?php echo $value['trabalhos']; ?></p>
+                    <p><?php echo $value['trabalhoTitulo']; ?></p>
                 </div>
-                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditTrabalho/' . $vals->evento["eventoId"] . "'>" ?>
+                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditTrabalho/' . $vals->evento["eventoId"] ."/". $value["trabalhoId"] . "'>" ?>
                     <i class="fas fa-pen"></i> Editar
                 </a>
             </li>

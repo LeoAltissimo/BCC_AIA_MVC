@@ -37,7 +37,7 @@
 
 				foreach ($linha as $key => $value) {
 					if( is_string( $value ) )
-						$this->eventos[$i]["$key"] = utf8_encode ($value);
+						$this->eventos[$i]["$key"] = $value;
 					else
 						$this->eventos[$i]["$key"] = $value;
 

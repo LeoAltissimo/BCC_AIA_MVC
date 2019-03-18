@@ -1,25 +1,81 @@
-<?php if ( ! defined('ABSPATH')) exit; ?>
+<?php if ( ! defined('ABSPATH')) exit;
+
+if( isset($parametros[1]) ) {
+    $vals = $modeloEvento;
+?>
 
 <section class="dash-card">
     <div class="header-container">
-        <h1><span class="first-letter">E</span>ventos</h1>
-        <?php echo  "<a  class='add-button' href='" .HOME_URI. "/admin/eventoEdit/'>" ?>
-            <i class="fas fa-user-plus"></i>
-        </a>
+        <h1><span class="first-letter">T</span>rabalho</h1>
     </div>
     <div>
-        <ul>
-        <?php foreach( $modeloEvento->eventos as $value ){ ?>
-            <li class="professor-item">
-                <div class="prof-container">
-                    <img class="prof-thumb" src="<?php echo HOME_URI . "/views/_images/" . $value['eventoCapa']; ?>" alt="">
-                    <p><?php echo $value['eventoNome']; ?></p>
-                </div>
-                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEdit/' . $value["eventoId"] . "'>" ?>
-                    <i class="fas fa-pen"></i> Editar
-                </a>
-            </li>
-        <?php } ?>    
-        </ul>
+        <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="eventoId" value="<?php echo $parametros[0] ?>">
+        <input type="hidden" name="trabalhoId" value="<?php echo $parametros[1] ?>">
+        <div class="col-10 input-container">
+            <input class="col-11 prof-input-text" type="text" name="trabalhoTitulo" placeholder="Titulo do Trabalho" value="<?php echo $vals["trabalhoTitulo"]; ?>" />
+            <input class="col-11 prof-input-text" type="text" name="trabalhoAutores" placeholder="Autores" value="<?php echo $vals->evento["trabalhoAutores"]; ?>" />
+        </div>
+        <div class="col-2">
+            <label id="inputBk"  class="label">
+                <i id="inputTumbLabel" class="fas fa-paperclip"></i>
+                <span class="title">Arquivo Trabalho</span>
+                <input id="inputTumb" type="file" name="trabalhoCaminho" type="file" value="<?php echo $vals->evento['trabalhoCaminho']; ?>"/>
+            </label>
+            <?php echo $vals->evento['trabalhoCaminho'] ?>
+        </div>
+            <input class="form-submit" type="submit">
+        </form>
     </div>
 </section>
+
+<script>
+var intervaulo = setInterval(() => {
+    var x = document.getElementById("inputTumb");
+    if ('files' in x) 
+        if (x.files.length > 0) {
+            var y = document.getElementById("inputTumbLabel").className = "far fa-check-circle";
+            clearInterval(intervaulo);
+        }
+}, 1000);
+</script>
+
+<?php
+} else {
+?>
+
+<section class="dash-card">
+    <div class="header-container">
+        <h1><span class="first-letter">T</span>rabalho</h1>
+    </div>
+    <div>
+        <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="eventoId" value="<?php echo $parametros[0] ?>">
+        <input type="hidden" name="trabalhoId">
+        <div class="col-10 input-container">
+            <input class="col-11 prof-input-text" type="text" name="trabalhoTitulo" placeholder="Titulo do Trabalho" />
+            <input class="col-11 prof-input-text" type="text" name="trabalhoAutores" placeholder="Autores" />
+        </div>
+        <div class="col-2">
+            <label id="inputBk"  class="label">
+                <i id="inputTumbLabel" class="fas fa-paperclip"></i>
+                <span class="title">Arquivo Trabalho</span>
+                <input id="inputTumb" type="file" name="trabalhoCaminho" type="file" />
+            </label>
+        </div>
+            <input class="form-submit" type="submit">
+        </form>
+    </div>
+</section>
+<script>
+var intervaulo = setInterval(() => {
+    var x = document.getElementById("inputTumb");
+    if ('files' in x) 
+        if (x.files.length > 0) {
+            var y = document.getElementById("inputTumbLabel").className = "far fa-check-circle";
+            clearInterval(intervaulo);
+        }
+}, 1000);
+</script>
+
+<?php } ?>
