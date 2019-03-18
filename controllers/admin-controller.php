@@ -156,7 +156,7 @@ class AdminController extends MainController
 
 
         if( $_POST ) {
-            $nome_final = null;
+            $nome_final = $modeloEvento->evento['eventoCapa'];
             if( $_FILES) {
                 $_UP['pasta'] = './views/_images/';
                 $_UP['tamanho'] = 1024*1024*100; //5mb
@@ -164,14 +164,15 @@ class AdminController extends MainController
 
                 //Faz a verificação da extensao do arquivo
                 $extensao = explode('.', $_FILES['capa-evento']['name']);
-                if(array_search($extensao[1], $_UP['extensoes']) === false) {		
-                    echo "ERROOOOUUU";
-                } else if ($_UP['tamanho'] < $_FILES['capa-evento']['size']){
-                    echo "ERROOOOUUU";
-                } else {
-                    $nome_final = time().'.jpg';
-                    move_uploaded_file($_FILES['capa-evento']['tmp_name'], $_UP['pasta']. $nome_final);
-                }
+                if( sizeof($extensao) === 2 )
+                    if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                        echo "ERROOOOUUU";
+                    } else if ($_UP['tamanho'] < $_FILES['capa-evento']['size']){
+                        echo "ERROOOOUUU";
+                    } else {
+                        $nome_final = time().'.jpg';
+                        move_uploaded_file($_FILES['capa-evento']['tmp_name'], $_UP['pasta']. $nome_final);
+                    }
             }
             
             $modeloEvento->postEvento( $_POST, $nome_final );
@@ -275,7 +276,7 @@ class AdminController extends MainController
 
                 //Faz a verificação da extensao do arquivo
                 $extensao = explode('.', $_FILES['trabalhoCaminho']['name']);
-                if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                if(array_search($extensao[0], $_UP['extensoes']) === false) {		
                     echo "ERROOOOUUU";
                 } else if ($_UP['tamanho'] < $_FILES['trabalhoCaminho']['size']){
                     echo "ERROOOOUUU";
@@ -292,8 +293,6 @@ class AdminController extends MainController
 
         if( isset($parametros[1]) )
             $vals = $modeloEvento->getTrabalho($parametros[1]);
-
-        echo $vals["trabalhoTitulo"];
 
         require ABSPATH . '/views/admin/_includes/header.php';
         require ABSPATH . '/views/admin/edit-evento-trabalho/edit-evento-trabalho-view.php';

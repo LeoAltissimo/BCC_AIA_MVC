@@ -19,7 +19,7 @@ class EventoModel extends MainModel{
 		$this->db = $db;
 		$this->controller = $controller;
 		$this->parametros = $this->controller->parametros;
-		$this->userdata = $this->controller->userdata;
+        $this->userdata = $this->controller->userdata;
 
 		if( !$this->getEvento( $this->parametros[0] ) )
             $this->listaDisciplinas             = 
@@ -53,7 +53,11 @@ class EventoModel extends MainModel{
         if( !$paramIdEvento )
             return false;
 
-        $query = "SELECT * FROM evento JOIN eventoemail, eventotel  WHERE evento.eventoId='$paramIdEvento' ";
+        $query = "SELECT * FROM evento 
+                            INNER JOIN eventoemail ON eventoemail.eventoId= '$paramIdEvento'
+                            INNER JOIN eventotel ON eventotel.eventoId= '$paramIdEvento'
+                            WHERE evento.eventoId='$paramIdEvento' ";
+        
         $resultquery = $this->db->query( $query );
 
 		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
@@ -256,7 +260,6 @@ class EventoModel extends MainModel{
 
             foreach( $linha as $key => $value ){
                     $intermed["$key"] = $value;
-                    echo $key . " " . $value . "   ";
             }
                 
             return $intermed;
@@ -318,7 +321,7 @@ class EventoModel extends MainModel{
             $query = "UPDATE evento SET eventoNome=".$params["nome"]
                                          .", eventoApresentacao=".$params["apresentacao"]
                                          .", eventoInicio=".$params["date-i"]
-                                         .", eventoFinal=".$params["date-f"]
+                                         .", eventoTermino=".$params["date-f"]
                                          .", eventoRegulamento=".$params["regulamento"]
                                          .", eventoProfOrganizador=".$params["prof-org"]
                                          .", eventoCapa=".$nomeArquivo
@@ -342,8 +345,6 @@ class EventoModel extends MainModel{
                         $params['date-i'] .",". $params['date-f'] .",".
                         $params['regulamento']. ",". $params['prof-org']. ",". $nomeArquivo .")";
 
-
-            echo $query;
             $this->db->query( $query );
 
             $query2 = "SELECT eventoId FROM evento WHERE  eventoNome=" . $params['nome'];
@@ -462,8 +463,6 @@ class EventoModel extends MainModel{
                     . $params['data']
                 .")";
 
-            echo $query;
-
             $this->db->query( $query );
         }
     }
@@ -479,10 +478,11 @@ class EventoModel extends MainModel{
         $nomeArquivo = $nomeArquivo ? "'".$nomeArquivo."'"  : 'null';
 
         if( $params["trabalhoId"] !== 'null' ) {
-            $query = "UPDATE acontecimento SET trabalhoAutores="     .$params["trabalhoAutores"]
+            $query = "UPDATE trabalho SET trabalhoAutores="     .$params["trabalhoAutores"]
                                            .", trabalhoTitulo="      .$params["trabalhoTitulo"]
                                            .", trabalhoCaminho="     .$nomeArquivo
                                            ." WHERE trabalhoId="     .$params["trabalhoId"];
+                      
             $this->db->query( $query );
         } else {
             $query = "INSERT INTO trabalho ( 
@@ -498,8 +498,6 @@ class EventoModel extends MainModel{
                     . $params['trabalhoAutores'] .","
                     . $nomeArquivo .","
                 .")";
-
-            echo $query;
 
             $this->db->query( $query );
         }

@@ -1,7 +1,6 @@
 <?php if ( ! defined('ABSPATH')) exit;
 
 if( isset($parametros[1]) ) {
-    $vals = $modeloEvento;
 ?>
 
 <section class="dash-card">
@@ -14,15 +13,15 @@ if( isset($parametros[1]) ) {
         <input type="hidden" name="trabalhoId" value="<?php echo $parametros[1] ?>">
         <div class="col-10 input-container">
             <input class="col-11 prof-input-text" type="text" name="trabalhoTitulo" placeholder="Titulo do Trabalho" value="<?php echo $vals["trabalhoTitulo"]; ?>" />
-            <input class="col-11 prof-input-text" type="text" name="trabalhoAutores" placeholder="Autores" value="<?php echo $vals->evento["trabalhoAutores"]; ?>" />
+            <input class="col-11 prof-input-text" type="text" name="trabalhoAutores" placeholder="Autores" value="<?php echo $vals["trabalhoAutores"]; ?>" />
         </div>
         <div class="col-2">
             <label id="inputBk"  class="label">
                 <i id="inputTumbLabel" class="fas fa-paperclip"></i>
                 <span class="title">Arquivo Trabalho</span>
-                <input id="inputTumb" type="file" name="trabalhoCaminho" type="file" value="<?php echo $vals->evento['trabalhoCaminho']; ?>"/>
+                <input id="inputTumb" type="file" name="trabalhoCaminho" type="file" value="<?php echo $vals['trabalhoCaminho']; ?>"/>
             </label>
-            <?php echo $vals->evento['trabalhoCaminho'] ?>
+            <?php echo $vals['trabalhoCaminho'] ?>
         </div>
             <input class="form-submit" type="submit">
         </form>

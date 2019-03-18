@@ -10,7 +10,7 @@ if( $parametros ) {
     </div>
     <div>
         <form method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="eventoId">
+        <input type="hidden" name="eventoId" value="<?php echo $parametros[0] ?>">
         <div class="col-10 input-container">
             <div class='col-12'>
             <input class="col-6 prof-input-text" type="text" name="nome" placeholder="Nome do evento" value="<?php echo $vals->evento["eventoNome"] ?>" />
@@ -47,12 +47,64 @@ if( $parametros ) {
             <?php echo $vals->evento['eventoCapa'] ?>
         </div>
         <div class="col-12">
-            <textarea class="col-12 prof-input-textarea" name="apresentacao" placeholder="Apresentacao" rows="10">
-                <?php echo $vals->evento["eventoApresentacao"] ?>
-            </textarea>
-            <textarea class="col-12 prof-input-textarea" name="regulamento" placeholder="Regulamento" rows="10">
-                <?php echo $vals->evento["eventoRegulamento"] ?>
-            </textarea>
+            <div class='editContainer'>
+                <div id='ApresentacaoeditControls' class="editControls">
+                    <div>
+                        <a data-role='undo' href='javascript:void(0)'><i class='fa fa-undo'></i></a>
+                        <a data-role='redo' href='javascript:void(0)'><i class='fa fa-repeat'></i></a>
+                        <a data-role='bold' href='javascript:void(0)'><i class='fa fa-bold'></i></a>
+                        <a data-role='italic' href='javascript:void(0)'><i class='fa fa-italic'></i></a>
+                        <a data-role='underline' href='javascript:void(0)'><i class='fa fa-underline'></i></a>
+                        <a data-role='strikeThrough' href='javascript:void(0)'><i class='fa fa-strikethrough'></i></a>
+                        <a data-role='justifyLeft' href='javascript:void(0)'><i class='fa fa-align-left'></i></a>
+                        <a data-role='justifyCenter' href='javascript:void(0)'><i class='fa fa-align-center'></i></a>
+                        <a data-role='justifyRight' href='javascript:void(0)'><i class='fa fa-align-right'></i></a>
+                        <a data-role='justifyFull' href='javascript:void(0)'><i class='fa fa-align-justify'></i></a>
+                        <a data-role='indent' href='javascript:void(0)'><i class='fa fa-indent'></i></a>
+                        <a data-role='outdent' href='javascript:void(0)'><i class='fa fa-outdent'></i></a>
+                        <a data-role='insertUnorderedList' href='javascript:void(0)'><i class='fa fa-list-ul'></i></a>
+                        <a data-role='insertOrderedList' href='javascript:void(0)'><i class='fa fa-list-ol'></i></a>
+                        <a data-role='h1' href='javascript:void(0)'>h<sup>1</sup></a>
+                        <a data-role='h2' href='javascript:void(0)'>h<sup>2</sup></a>
+                        <a data-role='p' href='javascript:void(0)'>p</a>
+                        <a data-role='subscript' href='javascript:void(0)'><i class='fa fa-subscript'></i></a>
+                        <a data-role='superscript' href='javascript:void(0)'><i class='fa fa-superscript'></i></a>
+                    </div>
+                </div>
+                <div id='editorApresentacao'class="editor" contenteditable>
+                    <?php echo $vals->evento["eventoApresentacao"] ?>
+                </div>
+                <input type="hidden" id='outputApresentacao' name="apresentacao" />
+            </div>
+            <div class='editContainer'>
+                <div id='RegulamentoeditControls' class="editControls">
+                <div>
+                    <a data-role='undo' href='javascript:void(0)'><i class='fa fa-undo'></i></a>
+                    <a data-role='redo' href='javascript:void(0)'><i class='fa fa-repeat'></i></a>
+                    <a data-role='bold' href='javascript:void(0)'><i class='fa fa-bold'></i></a>
+                    <a data-role='italic' href='javascript:void(0)'><i class='fa fa-italic'></i></a>
+                    <a data-role='underline' href='javascript:void(0)'><i class='fa fa-underline'></i></a>
+                    <a data-role='strikeThrough' href='javascript:void(0)'><i class='fa fa-strikethrough'></i></a>
+                    <a data-role='justifyLeft' href='javascript:void(0)'><i class='fa fa-align-left'></i></a>
+                    <a data-role='justifyCenter' href='javascript:void(0)'><i class='fa fa-align-center'></i></a>
+                    <a data-role='justifyRight' href='javascript:void(0)'><i class='fa fa-align-right'></i></a>
+                    <a data-role='justifyFull' href='javascript:void(0)'><i class='fa fa-align-justify'></i></a>
+                    <a data-role='indent' href='javascript:void(0)'><i class='fa fa-indent'></i></a>
+                    <a data-role='outdent' href='javascript:void(0)'><i class='fa fa-outdent'></i></a>
+                    <a data-role='insertUnorderedList' href='javascript:void(0)'><i class='fa fa-list-ul'></i></a>
+                    <a data-role='insertOrderedList' href='javascript:void(0)'><i class='fa fa-list-ol'></i></a>
+                    <a data-role='h1' href='javascript:void(0)'>h<sup>1</sup></a>
+                    <a data-role='h2' href='javascript:void(0)'>h<sup>2</sup></a>
+                    <a data-role='p' href='javascript:void(0)'>p</a>
+                    <a data-role='subscript' href='javascript:void(0)'><i class='fa fa-subscript'></i></a>
+                    <a data-role='superscript' href='javascript:void(0)'><i class='fa fa-superscript'></i></a>
+                </div>
+                </div>
+                <div id='editorRegulamento'class="editor" contenteditable>
+                    <?php echo $vals->evento["eventoRegulamento"] ?>
+                </div>
+                <input type="hidden" id='outputRegulamento' name="regulamento"/>
+            </div>
         </div>
         <div class="col-12">
             <div class="col-12">
@@ -87,7 +139,6 @@ if( $parametros ) {
             <li class="professor-item">
                 <div class="prof-container">
                     <p><?php echo $value['comissaoRotulo']; ?>: </p>
-                    <p><small><?php echo $value['comissaoIntegrantes']; ?></small></p>
                 </div>
                 <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditComissoes/' . $vals->evento["eventoId"] . "/". $value["comissaoId"] ."'>" ?>
                     <i class="fas fa-pen"></i> Editar
@@ -133,7 +184,7 @@ if( $parametros ) {
                 <div class="prof-container">
                     <p><?php echo $value['trabalhoTitulo']; ?></p>
                 </div>
-                <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/eventoEditTrabalho/' . $vals->evento["eventoId"] ."/". $value["trabalhoId"] . "'>" ?>
+                <?php echo  "<a id='sbmtButton' class='add-button' href='" .HOME_URI. '/admin/eventoEditTrabalho/' . $vals->evento["eventoId"] ."/". $value["trabalhoId"] . "'>" ?>
                     <i class="fas fa-pen"></i> Editar
                 </a>
             </li>
@@ -152,6 +203,49 @@ var intervaulo = setInterval(() => {
             clearInterval(intervaulo);
         }
 }, 1000);
+</script>
+<script type="text/javascript" src="<?php echo HOME_URI;?>/views/_js/jquery-2.2.3.min.js"></script>
+<script>
+$('#ApresentacaoeditControls a').click(function(e) {
+  switch($(this).data('role')) {
+    case 'h1':
+    case 'h2':
+    case 'p':
+      document.execCommand('formatBlock', false, $(this).data('role'));
+      break;
+    default:
+      document.execCommand($(this).data('role'), false, null);
+      break;
+    }
+  update_output();
+})
+$('#editorApresentacao').bind('blur keyup paste copy cut mouseup load', function(e) {
+  update_output('#outputApresentacao', '#editorApresentacao');
+})
+
+$('#RegulamentoeditControls a').click(function(e) {
+  switch($(this).data('role')) {
+    case 'h1':
+    case 'h2':
+    case 'p':
+      document.execCommand('formatBlock', false, $(this).data('role'));
+      break;
+    default:
+      document.execCommand($(this).data('role'), false, null);
+      break;
+    }
+  update_output();
+})
+$('#editorRegulamento').bind('blur keyup paste copy cut mouseup load', function(e) {
+  update_output('#outputRegulamento', '#editorRegulamento');
+})
+
+function update_output(param1, param2) {
+  $(param1).val($(param2).html());
+}
+
+update_output('#outputRegulamento', '#editorRegulamento');
+update_output('#outputApresentacao', '#editorApresentacao');
 </script>
 
 <?php
@@ -191,8 +285,64 @@ var intervaulo = setInterval(() => {
             </label>
         </div>
         <div class="col-12">
-            <textarea class="col-12 prof-input-textarea" name="apresentacao" placeholder="Apresentacao" rows="4"></textarea>
-            <textarea class="col-12 prof-input-textarea" name="regulamento" placeholder="Regulamento" rows="4"></textarea>
+            <div class='editContainer'>
+                <div id='ApresentacaoeditControls' class="editControls">
+                    <div>
+                        <a data-role='undo' href='javascript:void(0)'><i class='fa fa-undo'></i></a>
+                        <a data-role='redo' href='javascript:void(0)'><i class='fa fa-repeat'></i></a>
+                        <a data-role='bold' href='javascript:void(0)'><i class='fa fa-bold'></i></a>
+                        <a data-role='italic' href='javascript:void(0)'><i class='fa fa-italic'></i></a>
+                        <a data-role='underline' href='javascript:void(0)'><i class='fa fa-underline'></i></a>
+                        <a data-role='strikeThrough' href='javascript:void(0)'><i class='fa fa-strikethrough'></i></a>
+                        <a data-role='justifyLeft' href='javascript:void(0)'><i class='fa fa-align-left'></i></a>
+                        <a data-role='justifyCenter' href='javascript:void(0)'><i class='fa fa-align-center'></i></a>
+                        <a data-role='justifyRight' href='javascript:void(0)'><i class='fa fa-align-right'></i></a>
+                        <a data-role='justifyFull' href='javascript:void(0)'><i class='fa fa-align-justify'></i></a>
+                        <a data-role='indent' href='javascript:void(0)'><i class='fa fa-indent'></i></a>
+                        <a data-role='outdent' href='javascript:void(0)'><i class='fa fa-outdent'></i></a>
+                        <a data-role='insertUnorderedList' href='javascript:void(0)'><i class='fa fa-list-ul'></i></a>
+                        <a data-role='insertOrderedList' href='javascript:void(0)'><i class='fa fa-list-ol'></i></a>
+                        <a data-role='h1' href='javascript:void(0)'>h<sup>1</sup></a>
+                        <a data-role='h2' href='javascript:void(0)'>h<sup>2</sup></a>
+                        <a data-role='p' href='javascript:void(0)'>p</a>
+                        <a data-role='subscript' href='javascript:void(0)'><i class='fa fa-subscript'></i></a>
+                        <a data-role='superscript' href='javascript:void(0)'><i class='fa fa-superscript'></i></a>
+                    </div>
+                </div>
+                <div id='editorApresentacao'class="editor" contenteditable>
+                    Apresentação
+                </div>
+                <input type="hidden" id='outputApresentacao' name="apresentacao"/>
+            </div>
+            <div class='editContainer'>
+                <div id='RegulamentoeditControls' class="editControls">
+                    <div>
+                        <a data-role='undo' href='javascript:void(0)'><i class='fa fa-undo'></i></a>
+                        <a data-role='redo' href='javascript:void(0)'><i class='fa fa-repeat'></i></a>
+                        <a data-role='bold' href='javascript:void(0)'><i class='fa fa-bold'></i></a>
+                        <a data-role='italic' href='javascript:void(0)'><i class='fa fa-italic'></i></a>
+                        <a data-role='underline' href='javascript:void(0)'><i class='fa fa-underline'></i></a>
+                        <a data-role='strikeThrough' href='javascript:void(0)'><i class='fa fa-strikethrough'></i></a>
+                        <a data-role='justifyLeft' href='javascript:void(0)'><i class='fa fa-align-left'></i></a>
+                        <a data-role='justifyCenter' href='javascript:void(0)'><i class='fa fa-align-center'></i></a>
+                        <a data-role='justifyRight' href='javascript:void(0)'><i class='fa fa-align-right'></i></a>
+                        <a data-role='justifyFull' href='javascript:void(0)'><i class='fa fa-align-justify'></i></a>
+                        <a data-role='indent' href='javascript:void(0)'><i class='fa fa-indent'></i></a>
+                        <a data-role='outdent' href='javascript:void(0)'><i class='fa fa-outdent'></i></a>
+                        <a data-role='insertUnorderedList' href='javascript:void(0)'><i class='fa fa-list-ul'></i></a>
+                        <a data-role='insertOrderedList' href='javascript:void(0)'><i class='fa fa-list-ol'></i></a>
+                        <a data-role='h1' href='javascript:void(0)'>h<sup>1</sup></a>
+                        <a data-role='h2' href='javascript:void(0)'>h<sup>2</sup></a>
+                        <a data-role='p' href='javascript:void(0)'>p</a>
+                        <a data-role='subscript' href='javascript:void(0)'><i class='fa fa-subscript'></i></a>
+                        <a data-role='superscript' href='javascript:void(0)'><i class='fa fa-superscript'></i></a>
+                    </div>
+                </div>
+                <div id='editorRegulamento'class="editor" contenteditable>
+                    Regulamento
+                </div>
+                <input type="hidden" id='outputRegulamento' name="regulamento" />
+            </div>
         </div>
         <div class="col-12">
             <div class="col-12">
@@ -225,5 +375,46 @@ var intervaulo = setInterval(() => {
         }
 }, 1000);
 </script>
+<script type="text/javascript" src="<?php echo HOME_URI;?>/views/_js/jquery-2.2.3.min.js"></script>
+<script>
+$('#ApresentacaoeditControls a').click(function(e) {
+  switch($(this).data('role')) {
+    case 'h1':
+    case 'h2':
+    case 'p':
+      document.execCommand('formatBlock', false, $(this).data('role'));
+      break;
+    default:
+      document.execCommand($(this).data('role'), false, null);
+      break;
+    }
+  update_output();
+})
+$('#editorApresentacao').bind('blur keyup paste copy cut mouseup', function(e) {
+  update_output('#outputApresentacao', '#editorApresentacao');
+})
+
+$('#RegulamentoeditControls a').click(function(e) {
+  switch($(this).data('role')) {
+    case 'h1':
+    case 'h2':
+    case 'p':
+      document.execCommand('formatBlock', false, $(this).data('role'));
+      break;
+    default:
+      document.execCommand($(this).data('role'), false, null);
+      break;
+    }
+  update_output();
+})
+$('#editorRegulamento').bind('blur keyup paste copy cut mouseup', function(e) {
+  update_output('#outputRegulamento', '#editorRegulamento');
+})
+
+function update_output(param1, param2) {
+  $(param1).val($(param2).html());
+}
+</script>
+
 
 <?php } ?>
