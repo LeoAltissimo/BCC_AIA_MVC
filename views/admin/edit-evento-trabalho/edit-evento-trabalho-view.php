@@ -19,7 +19,7 @@ if( isset($parametros[1]) ) {
             <label id="inputBk"  class="label">
                 <i id="inputTumbLabel" class="fas fa-paperclip"></i>
                 <span class="title">Arquivo Trabalho</span>
-                <input id="inputTumb" type="file" name="trabalhoCaminho" type="file" value="<?php echo $vals['trabalhoCaminho']; ?>"/>
+                <input id="inputTumb" type="file" name="trabalho-caminho" type="file" value="<?php echo $vals['trabalhoCaminho']; ?>"/>
             </label>
             <?php echo $vals['trabalhoCaminho'] ?>
         </div>
@@ -59,7 +59,7 @@ var intervaulo = setInterval(() => {
             <label id="inputBk"  class="label">
                 <i id="inputTumbLabel" class="fas fa-paperclip"></i>
                 <span class="title">Arquivo Trabalho</span>
-                <input id="inputTumb" type="file" name="trabalhoCaminho" type="file" />
+                <input id="inputTumb" type="file" name="trabalho-caminho" type="file" />
             </label>
         </div>
             <input class="form-submit" type="submit">

@@ -56,8 +56,8 @@ class CoreDB
 			$this->pdo = new mysqli( $this->host , 
 									 $this->user, 
 									 $this->password, 
-									 $this->db_name ); 
-			
+									 $this->db_name );
+									 
 			unset( $this->host     );
 			unset( $this->db_name  );
 			unset( $this->password );

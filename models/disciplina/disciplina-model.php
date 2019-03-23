@@ -10,6 +10,9 @@ class DisciplinaModel extends MainModel{
     public $creditos = array( array() );
     public $bibliografiaBas = array( array() );
     public $bibliografiaCompl = array( array() );
+    public $profList = array( array() );
+    public $disciplinasList = array( array() );
+    public $semestreList = array( array() );
 
     public function __construct( $db = false, $controller = null ){
 
@@ -30,9 +33,11 @@ class DisciplinaModel extends MainModel{
 
             if( !$this->getBiblioCompl() )
                $this->bibliografiaCompl = null;
-
-
         }
+
+        $this->getProfList();
+        $this->getDisciplinasList();
+        $this->getSemestreList();
 	}
 
     protected function getDisciplina( $paramId = null ){
@@ -51,7 +56,7 @@ class DisciplinaModel extends MainModel{
 
             foreach( $linha as $key => $value ){
                 if(  is_string( $value ) )
-                    $this->disciplina["$key"] = utf8_encode( $value );
+                    $this->disciplina["$key"] = $value;
                 else
                     $this->disciplina["$key"] = $value;
             }
@@ -103,24 +108,25 @@ class DisciplinaModel extends MainModel{
                 
                 switch( $linha["distribcreditosTipo"] ){
                     case 1:
+                        
                         $this->creditos[0]["Credito"] = $linha["distribcreditosCreditos"];
-                        $this->creditos[0]["horas"] = utf8_encode( $linha["distribcreditosHorasaula"]);
+                        $this->creditos[0]["horas"] =  $linha["distribcreditosHorasaula"];
                     break;
                     case 2:
                         $this->creditos[1]["Credito"] = $linha["distribcreditosCreditos"];
-                        $this->creditos[1]["horas"] = utf8_encode( $linha["distribcreditosHorasaula"]);
+                        $this->creditos[1]["horas"] = $linha["distribcreditosHorasaula"];
                     break;
                     case 3:
                         $this->creditos[2]["Credito"] = $linha["distribcreditosCreditos"];
-                        $this->creditos[2]["horas"] = utf8_encode( $linha["distribcreditosHorasaula"]);
+                        $this->creditos[2]["horas"] = $linha["distribcreditosHorasaula"];
                     break;
                     case 4:
                         $this->creditos[3]["Credito"] = $linha["distribcreditosCreditos"];
-                        $this->creditos[3]["horas"] = utf8_encode( $linha["distribcreditosHorasaula"]);
+                        $this->creditos[3]["horas"] =  $linha["distribcreditosHorasaula"];
                     break;
                     case 5:
                         $this->creditos[4]["Credito"] = $linha["distribcreditosCreditos"];
-                        $this->creditos[4]["horas"] = utf8_encode( $linha["distribcreditosHorasaula"]);
+                        $this->creditos[4]["horas"] =  $linha["distribcreditosHorasaula"];
                     break;
                     default:
                     break;
@@ -128,6 +134,18 @@ class DisciplinaModel extends MainModel{
 
             }
             return true;
+        }   
+        else
+            return false;
+    }
+
+    public function getCreditosToEdit( ){
+        $query = "SELECT * FROM distribcreditos WHERE distribcreditos.disciplinaId=" . $this->disciplina["disciplinaId"];
+        $resultquery = $this->db->query( $query );
+
+        if( $resultquery && ( $resultquery->num_rows != 0 ) ){  
+                $resultquery->data_seek( 0 );
+                return $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
         }   
         else
             return false;
@@ -146,7 +164,7 @@ class DisciplinaModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->bibliografiaBas[$i]["$key"] = utf8_encode( $value );
+                        $this->bibliografiaBas[$i]["$key"] = $value;
                     else
                         $this->bibliografiaBas[$i]["$key"] = $value;
                 }
@@ -170,7 +188,7 @@ class DisciplinaModel extends MainModel{
 
                 foreach( $linha as $key => $value ){
                     if(  is_string( $value ) )
-                        $this->bibliografiaCompl[$i]["$key"] = utf8_encode( $value );
+                        $this->bibliografiaCompl[$i]["$key"] = $value;
                     else
                         $this->bibliografiaCompl[$i]["$key"] = $value;
                 }
@@ -181,5 +199,142 @@ class DisciplinaModel extends MainModel{
             return false;
     }
 
+    public function getDisciplinasList(){
+        $query = 'SELECT disciplinaId, disciplinaNome FROM disciplina';
+        $resultquery = $this->db->query( $query );
 
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            for( $i = 0 ; $i < $resultquery->num_rows ; $i++){    
+                $resultquery->data_seek( $i );
+                $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+                foreach( $linha as $key => $value ){
+                    $this->disciplinasList[$i]["$key"] = $value;
+                }
+            }  
+            return true;
+        }   
+        else
+            return false;
+    }
+
+    protected function getProfList() { 
+        $query = 'SELECT professorId, professorNome FROM professor';
+        $resultquery = $this->db->query( $query );
+
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            for( $i = 0 ; $i < $resultquery->num_rows ; $i++){    
+                $resultquery->data_seek( $i );
+                $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+                foreach( $linha as $key => $value ){
+                    $this->profList[$i]["$key"] = $value;
+                }
+            }  
+            return true;
+        }   
+        else
+            return false;
+    }
+
+    protected function getSemestreList() { 
+        $query = 'SELECT semestreId, semestre FROM semestre';
+        $resultquery = $this->db->query( $query );
+
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            for( $i = 0 ; $i < $resultquery->num_rows ; $i++){    
+                $resultquery->data_seek( $i );
+                $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+                foreach( $linha as $key => $value ){
+                    $this->semestreList[$i]["$key"] = $value;
+                }
+            }  
+            return true;
+        }   
+        else
+            return false;
+    }
+
+    public function postDisciplina( $params = null ) {
+        if( $params == null )
+            return false;
+
+        $params["disciplinaId"] = $params["disciplinaId"] ? "'".$params["disciplinaId"]."'" : 'null';
+        $params["disciplinaSemetre"] = $params["disciplinaSemetre"] ? "'".$params["disciplinaSemetre"]."'" : 'null';
+        $params["nome"] = $params["nome"] ? "'".$params["nome"]."'" : 'null';
+        $params["prerequisito"] = $params["prerequisito"] ? "'".$params["prerequisito"]."'" : 'null';
+        $params["profArea"] = $params["profArea"] ? "'".$params["profArea"]."'" : 'null';
+        $params["disciplinaProfessor"] = $params["disciplinaProfessor"] ? "'".$params["disciplinaProfessor"]."'" : 'null';
+        $params["ementa"] = $params["ementa"] ? "'".$params["ementa"]."'" : 'null';
+        $params["objetivo"] = $params["objetivo"] ? "'".$params["objetivo"]."'" : 'null';
+
+        $params["distribcreditosId"] = $params["distribcreditosId"] ? "'".$params["distribcreditosId"]."'" : 'null';
+        $params["distribcreditosTipo"] = $params["distribcreditosTipo"] ? "'".$params["distribcreditosTipo"]."'" : 'null';
+        $params["distribcreditosCreditos"] = $params["distribcreditosCreditos"] ? "'".$params["distribcreditosCreditos"]."'" : 'null';
+        $params["distribcreditosHorasaula"] = $params["distribcreditosHorasaula"] ? "'".$params["distribcreditosHorasaula"]."'" : 'null';
+
+        if( $params["disciplinaId"] !== 'null' ) {
+            $query = "UPDATE disciplina SET  disciplinaNome=".$params["nome"]
+                                         .", semestreId=".$params["disciplinaSemetre"] 
+                                         .", disciplinaPrerequisito=".$params["prerequisito"]
+                                         .", disciplinaProfarea=".$params["profArea"]
+                                         .", disciplinaProf=".$params["disciplinaProfessor"]
+                                         .", disciplinaEmenta=".$params["ementa"]
+                                         .", disciplinaObjetivo=".$params["objetivo"]
+                                         ." WHERE disciplinaId=".$params["disciplinaId"];
+            
+            $this->db->query( $query );
+
+            $query2 = "UPDATE distribcreditos SET distribcreditosTipo=".$params["distribcreditosTipo"] 
+                                            .", distribcreditosCreditos=".$params["distribcreditosCreditos"]
+                                            .", distribcreditosHorasaula=".$params["distribcreditosHorasaula"]
+                                            ." WHERE distribcreditosId=".$params["distribcreditosId"];
+            
+           $this->db->query( $query2 );
+        } else {
+            $query = "INSERT INTO `disciplina` (
+                `disciplinaId`, `semestreId`, 
+                `disciplinaNome`, `disciplinaPrerequisito`, 
+                `disciplinaProfarea`, `disciplinaProf`, 
+                `disciplinaEmenta`, `disciplinaObjetivo`
+                )
+                VALUES( null," 
+                        . $params['disciplinaSemetre'] .","
+                        . $params['nome'] .","
+                        . $params['prerequisito'] .","
+                        . $params['profArea'] .","
+                        . $params['disciplinaProfessor']. ","
+                        . $params['ementa']. ","
+                        . $params['objetivo']
+                .")";
+
+            $this->db->query( $query );
+
+            $query2 = "SELECT disciplinaId FROM disciplina WHERE disciplinaNome=" . $params['nome'];
+            $resultquery = $this->db->query( $query2 );
+
+		    if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+                $resultquery->data_seek( 0 );
+                $result = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+                $result["disciplinaId"] =  "'".$result["disciplinaId"]."'";
+
+                $query2 = "INSERT INTO `distribcreditos` (
+                    `distribcreditosId`, `disciplinaId`, 
+                    `distribcreditosTipo`, `distribcreditosCreditos`, 
+                    `distribcreditosHorasaula`
+                    ) VALUES (null,"
+                        . $result["disciplinaId"] . ","
+                        . $params['distribcreditosTipo'] .","
+                        . $params['distribcreditosCreditos'] .","
+                        . $params['distribcreditosHorasaula']
+                .")";
+
+                $this->db->query( $query2 );
+            }
+
+            
+        }
+    }
 }

@@ -23,14 +23,15 @@ class MuraldisciplinasModel extends MainModel{
 	public function getdisciplinas(){
        
         $query = "SELECT * FROM semestre ";
-		$resultquery = $this->db->query( $query );
+		$querySemestre = $this->db->query( $query );
 
-		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+		if( $querySemestre && ( $querySemestre->num_rows != 0 ) ){
 
-            $this->numSemestre = $resultquery->num_rows;
+			for( $i = 0 ; $i < $querySemestre->num_rows; $i++){
+                $querySemestre->data_seek( $i );
+                $semestre = $querySemestre->fetch_array(MYSQLI_ASSOC);
 
-			for( $i = 0 ; $i < $this->numSemestre; $i++){
-                $query = "SELECT disciplinaId, disciplinaNome FROM disciplina WHERE semestreID='" . ($i) . "'";
+                $query = "SELECT disciplinaId, disciplinaNome FROM disciplina WHERE semestreId='" . ($semestre['semestreId']) . "'";
                 $resultquery = $this->db->query( $query );
                 
                 if( $resultquery && ( $resultquery->num_rows != 0 ) ){
@@ -43,8 +44,8 @@ class MuraldisciplinasModel extends MainModel{
                             if( isset($title[1]) )
                                 $title[0] = $title[0] . "...";
                             
-                            $this->listaDisciplinas[$i][$j]["disciplinaId"] = utf8_encode ($linha[0]);
-                            $this->listaDisciplinas[$i][$j]["disciplinaNome"] = utf8_encode ($title[0]);
+                            $this->listaDisciplinas[$i][$j]["disciplinaId"] = $linha[0];
+                            $this->listaDisciplinas[$i][$j]["disciplinaNome"] = $linha[1];
                 }
 
 			}

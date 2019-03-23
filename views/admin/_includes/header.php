@@ -14,7 +14,6 @@
 <head>
 	<title><?php echo $this->title; ?></title>
 	<!-- Meta Tags -->
-	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<script type="application/x-javascript">
@@ -65,7 +64,7 @@
             </a>
           </li>
           <li>
-            <a class="main-menu-item" href="index.html">
+            <a class="main-menu-item" href='<?php echo HOME_URI . '/admin/disciplinas/';?>'>
             <i class="fas fa-book"></i> Disciplinas
             </a>
           </li>

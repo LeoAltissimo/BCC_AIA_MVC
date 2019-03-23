@@ -269,23 +269,27 @@ class AdminController extends MainController
 
         if( $_POST ) {
             $nome_final = null;
-            if( $_FILES) {
+            if( $_FILES['trabalho-caminho']['name']) {
                 $_UP['pasta'] = './files/';
                 $_UP['tamanho'] = 1024*1024*100; //5mb
                 $_UP['extensoes'] = array('pdf');
-
+                
                 //Faz a verificação da extensao do arquivo
-                $extensao = explode('.', $_FILES['trabalhoCaminho']['name']);
-                if(array_search($extensao[0], $_UP['extensoes']) === false) {		
-                    echo "ERROOOOUUU";
-                } else if ($_UP['tamanho'] < $_FILES['trabalhoCaminho']['size']){
-                    echo "ERROOOOUUU";
+                if( !file_exists($_UP['pasta'] . $_FILES['trabalho-caminho']['name'] ) ){
+                    $extensao = explode('.', $_FILES['trabalho-caminho']['name']);
+                    if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                        echo "ERROOOOUUU 1";
+                    } else if ($_UP['tamanho'] < $_FILES['trabalho-caminho']['size']){
+                        echo "ERROOOOUUU 2";
+                    } else {
+                        $nome_final = time().'.pdf';
+                        move_uploaded_file($_FILES['trabalho-caminho']['tmp_name'], $_UP['pasta']. $nome_final);
+                    }
                 } else {
-                    $nome_final = time().'.pdf';
-                    move_uploaded_file($_FILES['trabalhoCaminho']['tmp_name'], $_UP['pasta']. $nome_final);
+                    $nome_final = $_FILES['trabalho-caminho']['name'];
                 }
             }
-            
+
             $modeloEvento->postEventoTrabalho( $_POST, $nome_final );
             $this->eventos();
             return;
@@ -298,4 +302,53 @@ class AdminController extends MainController
         require ABSPATH . '/views/admin/edit-evento-trabalho/edit-evento-trabalho-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';
     }
+
+    //Carrega a página "/views/amdmin/disciplinas.php"
+    public function disciplinas() {
+
+        // Verifica se o usuário está logado
+        if ( ! $this->logged_in ) {
+            $this->logout();
+            $this->login();
+            return;
+        }
+
+        $this->title = 'Disciplinas';
+        
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+
+        $modeloDisciplinas = $this->load_model('muraldisciplinas/muraldisciplinas-model');
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/admin/_includes/header.php';
+        require ABSPATH . '/views/admin/lista-disciplinas/lista-disciplinas-view.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
+        
+    }
+
+    //Carrega a página "/views/amdmin/disciplinaEdit/id.php"
+    public function disciplinaEdit() {
+        if ( ! $this->logged_in ) {
+            $this->logout();
+            $this->login();
+            return;
+        }
+
+        $this->title = 'Disciplinas';
+        
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+
+        $modeloDisciplinas = $this->load_model('disciplina/disciplina-model');
+
+        if( $_POST ) {
+            $modeloDisciplinas->postDisciplina( $_POST );
+            $this->disciplinas();
+            return;
+        } 
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/admin/_includes/header.php';
+        require ABSPATH . '/views/admin/edit-disciplinas/edit-disciplinas-view.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
+    }  
 }

@@ -26,7 +26,6 @@ if ( ! defined('ABSPATH')) exit;
 											<a href='<?php echo HOME_URI . '/evento/index/' . $evento['eventoId'] ;?>'>
 												<h5><?php echo $evento['eventoNome'];?></h5>
 												<span><?php echo "Início " . ($modeloEvento->inverte_data( $evento['eventoInicio'] )) . " término " . ($modeloEvento->inverte_data( $evento['eventoTermino'] ));?></span>
-												<p class="para-w3ls"><?php echo (substr( $evento['eventoApresentacao'], 0, 200)) . '...' ;?></p>
 											</a>
 										</div>
 									</div>

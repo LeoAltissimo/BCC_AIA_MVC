@@ -478,14 +478,19 @@ class EventoModel extends MainModel{
         $nomeArquivo = $nomeArquivo ? "'".$nomeArquivo."'"  : 'null';
 
         if( $params["trabalhoId"] !== 'null' ) {
-            $query = "UPDATE trabalho SET trabalhoAutores="     .$params["trabalhoAutores"]
+            if( $nomeArquivo !== 'null' )
+                $query = "UPDATE trabalho SET trabalhoAutores="     .$params["trabalhoAutores"]
                                            .", trabalhoTitulo="      .$params["trabalhoTitulo"]
                                            .", trabalhoCaminho="     .$nomeArquivo
                                            ." WHERE trabalhoId="     .$params["trabalhoId"];
+            else
+                $query = "UPDATE trabalho SET trabalhoAutores="     .$params["trabalhoAutores"]
+                                            .", trabalhoTitulo="      .$params["trabalhoTitulo"]
+                                            ." WHERE trabalhoId="     .$params["trabalhoId"];
                       
             $this->db->query( $query );
         } else {
-            $query = "INSERT INTO trabalho ( 
+            $query = "INSERT INTO `trabalho`( 
                     `trabalhoId`, 
                     `eventoId`, 
                     `trabalhoTitulo`, 
@@ -496,7 +501,7 @@ class EventoModel extends MainModel{
                     . $params['eventoId'] .","
                     . $params['trabalhoTitulo'] .","
                     . $params['trabalhoAutores'] .","
-                    . $nomeArquivo .","
+                    . $nomeArquivo
                 .")";
 
             $this->db->query( $query );
