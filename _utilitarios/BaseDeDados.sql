@@ -239,9 +239,11 @@ CREATE TABLE IF NOT EXISTS `bccaia`.`bibliografia` (
 ) ENGINE = INNODB CHARSET = utf8 ;
 
 CREATE TABLE IF NOT EXISTS `bccaia`.`disciblibio` (
-  `disciplinaId`         INT (11) NOT NULL,
-  `bibliografiaId`   INT (11) NOT NULL,
-  `disciblibioTipo`      VARCHAR(24),
+  `disciblibioId`   INT (11) NOT NULL AUTO_INCREMENT,
+  `disciplinaId`    INT (11) NOT NULL,
+  `bibliografiaId`  INT (11) NOT NULL,
+  `disciblibioTipo` VARCHAR(24),
+  PRIMARY KEY (`disciblibioId`),
   FOREIGN KEY (`disciplinaId`) REFERENCES `disciplina`(`disciplinaId`),
   FOREIGN KEY (`bibliografiaId`) REFERENCES `bibliografia`(`bibliografiaId`)
 ) ENGINE = INNODB CHARSET = utf8 ;

@@ -350,5 +350,35 @@ class AdminController extends MainController
         require ABSPATH . '/views/admin/_includes/header.php';
         require ABSPATH . '/views/admin/edit-disciplinas/edit-disciplinas-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';
-    }  
+    } 
+
+    //Carrega a página "/views/amdmin/disciplinaEdit/id.php"
+    public function disciplinaEditBibliografia() {
+        if ( ! $this->logged_in ) {
+            $this->logout();
+            $this->login();
+            return;
+        }
+
+        $this->title = 'Bibliografia';
+        
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+        
+        $modeloDisciplinas = $this->load_model('disciplina/disciplina-model');
+
+        if( $parametros[1] !== 'N' ) {
+            $modeloDisciplinas->getLivro( $parametros[1] );
+        }
+
+        if( $_POST ) {
+            $modeloDisciplinas->postDisciplinaBibliografia( $_POST );
+            $this->disciplinas();
+            return;
+        } 
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/admin/_includes/header.php';
+        require ABSPATH . '/views/admin/edit-disciplinas-bibliografia/edit-disciplinas-bibliografia-view.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
+    } 
 }

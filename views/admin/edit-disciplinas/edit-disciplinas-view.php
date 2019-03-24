@@ -34,7 +34,7 @@ if( $parametros ) {
                 <select class="col-12 prof-input-text" name="disciplinaProfessor" placeholder="Professor">
                 <option label="Nenhum Professor">
                 <?php foreach( $vals->profList as $value ) { ?>
-                    <option value=<?php echo $value['professorId'];  echo ($vals->disciplina['disciplinaProf'] == $value['professorNome']) ? ' selected' : null; ?>>
+                    <option value=<?php echo $value['professorId'];  echo ($vals->disciplina['disciplinaProf'] == $value['professorId']) ? ' selected' : null; ?>>
                         <?php echo $value['professorNome'] ?>
                     </option>
                 <?php } ?>
@@ -126,6 +126,50 @@ if( $parametros ) {
         </div>
             <input class="form-submit" type="submit">
         </form>
+    </div>
+</section>
+<section class="dash-card">
+    <div class="header-container">
+        <h1><span class="first-letter">B</span>ibliografia Básica</h1>
+        <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/disciplinaEditBibliografia/' . $vals->disciplina["disciplinaId"] . "/N/1". "'>" ?>
+            <i class="fas fa-plus"></i> Adiconar Bibliografia
+        </a>
+    </div>
+    <div>
+      <ul>
+      <?php if( $vals->bibliografiaBas ) foreach( $vals->bibliografiaBas as $value ){ ?>
+        <li class="professor-item">
+            <div class="prof-container">
+                <p><?php echo $value['bibliografiaTitulo']; ?>: </p>
+            </div>
+            <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/disciplinaEditBibliografia/' . $vals->disciplina["disciplinaId"] . "/". $value["bibliografiaId"] . "/1'>" ?>
+                <i class="fas fa-pen"></i> Editar
+            </a>
+        </li>
+      <?php } ?>
+      </ul>
+    </div>
+</section>
+<section class="dash-card">
+    <div class="header-container">
+        <h1><span class="first-letter">B</span>ibliografia Complementar</h1>
+        <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/disciplinaEditBibliografia/' . $vals->disciplina["disciplinaId"] . "/N/2". "'>" ?>
+            <i class="fas fa-plus"></i> Adiconar Bibliografia
+        </a>
+    </div>
+    <div>
+      <ul>
+      <?php if( $vals->bibliografiaCompl ) foreach( $vals->bibliografiaCompl as $value ){ ?>
+        <li class="professor-item">
+            <div class="prof-container">
+                <p><?php echo $value['bibliografiaTitulo']; ?>: </p>
+            </div>
+            <?php echo  "<a  class='add-button' href='" .HOME_URI. '/admin/disciplinaEditBibliografia/' . $vals->disciplina["disciplinaId"] . "/". $value["bibliografiaId"] . "/2'>" ?>
+                <i class="fas fa-pen"></i> Editar
+            </a>
+        </li>
+      <?php } ?>
+      </ul>
     </div>
 </section>
 

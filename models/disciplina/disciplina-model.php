@@ -7,6 +7,7 @@
 class DisciplinaModel extends MainModel{
 
     public $disciplina = array();
+    public $livro = array();
     public $creditos = array( array() );
     public $bibliografiaBas = array( array() );
     public $bibliografiaCompl = array( array() );
@@ -152,8 +153,7 @@ class DisciplinaModel extends MainModel{
     }
 
     protected function getBiblioBas(){
-
-        $query = "SELECT * FROM disciblibio JOIN bibliografia ON disciblibio.bibliografiaId = bibliografia.bibliografiaId WHERE disciblibio.disciblibioTipo='1' AND  disciblibio.disciplinaId=" . $this->disciplina["disciplinaId"];
+        $query = "SELECT * FROM disciblibio INNER JOIN bibliografia ON disciblibio.bibliografiaId = bibliografia.bibliografiaId WHERE disciblibio.disciblibioTipo='1' AND  disciblibio.disciplinaId=" . $this->disciplina["disciplinaId"];
         $resultquery = $this->db->query( $query );
 
         if( $resultquery && ( $resultquery->num_rows != 0 ) ){
@@ -177,7 +177,7 @@ class DisciplinaModel extends MainModel{
 
     protected function getBiblioCompl(){
 
-        $query = "SELECT * FROM disciblibio JOIN bibliografia ON disciblibio.bibliografiaId = bibliografia.bibliografiaId WHERE disciblibio.disciblibioTipo='2' AND  disciblibio.disciplinaId=" . $this->disciplina["disciplinaId"];
+        $query = "SELECT * FROM disciblibio INNER JOIN bibliografia ON disciblibio.bibliografiaId = bibliografia.bibliografiaId WHERE disciblibio.disciblibioTipo='2' AND  disciblibio.disciplinaId=" . $this->disciplina["disciplinaId"];
         $resultquery = $this->db->query( $query );
 
         if( $resultquery && ( $resultquery->num_rows != 0 ) ){
@@ -250,6 +250,23 @@ class DisciplinaModel extends MainModel{
                     $this->semestreList[$i]["$key"] = $value;
                 }
             }  
+            return true;
+        }   
+        else
+            return false;
+    }
+
+    public function getLivro($id = null) {
+        $query = 'SELECT * FROM bibliografia WHERE bibliografiaId=' . $id;
+        $resultquery = $this->db->query( $query );
+
+		if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+            $resultquery->data_seek( 0 );
+            $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+            foreach( $linha as $key => $value ){
+                $this->livro["$key"] = $value;
+            } 
             return true;
         }   
         else
@@ -335,6 +352,73 @@ class DisciplinaModel extends MainModel{
             }
 
             
+        }
+    }
+
+    public function postDisciplinaBibliografia( $params = null ) {
+        if( $params == null )
+        return false;
+
+        if( $params["bibliografiaId"] === 'N' )
+            $params["bibliografiaId"] = null;
+
+        $params["disciplinaId"] =        $params["disciplinaId"] ? "'".       $params["disciplinaId"]."'"        : 'null';
+        $params["bibliografiaId"] =      $params["bibliografiaId"] ? "'".     $params["bibliografiaId"]."'"      : 'null';
+        $params["disciblibioTipo"] =     $params["disciblibioTipo"] ? "'".    $params["disciblibioTipo"]."'"     : 'null';
+        $params["bibliografiaTitulo"] =  $params["bibliografiaTitulo"] ? "'". $params["bibliografiaTitulo"]."'"  : 'null';
+        $params["bibliografiaAutor"] =   $params["bibliografiaAutor"] ? "'".  $params["bibliografiaAutor"]."'"   : 'null';
+        $params["bibliografiaEditora"] = $params["bibliografiaEditora"] ? "'".$params["bibliografiaEditora"]."'" : 'null';
+        $params["bibliografiaAno"] =     $params["bibliografiaAno"] ? "'".    $params["bibliografiaAno"]."'"     : 'null';
+        $params["bibliografiaVolume"] =  $params["bibliografiaVolume"] ? "'". $params["bibliografiaVolume"]."'"  : 'null';
+        $params["bibliografiaEdicao"] =  $params["bibliografiaEdicao"] ? "'". $params["bibliografiaEdicao"]."'"  : 'null';
+
+        if( $params["bibliografiaId"] !== 'null' ) {
+            $query = "UPDATE bibliografia SET  bibliografiaTitulo=".$params["bibliografiaTitulo"]
+                                        .", bibliografiaAutor=".$params["bibliografiaAutor"] 
+                                        .", bibliografiaEdicao=".$params["bibliografiaEdicao"]
+                                        .", bibliografiaAno=".$params["bibliografiaAno"]
+                                        .", bibliografiaVolume=".$params["bibliografiaVolume"]
+                                        .", bibliografiaEditora=".$params["bibliografiaEditora"]
+                                        ." WHERE bibliografiaId=".$params["bibliografiaId"];
+            
+            $this->db->query( $query );
+
+        } else {
+            $query = "INSERT INTO `bibliografia` (
+                `bibliografiaId`, `bibliografiaTitulo`, 
+                `bibliografiaAutor`, `bibliografiaEdicao`, 
+                `bibliografiaAno`, `bibliografiaVolume`, 
+                `bibliografiaEditora`
+                )VALUES( null," 
+                        . $params['bibliografiaTitulo'] .","
+                        . $params['bibliografiaAutor'] .","
+                        . $params['bibliografiaEdicao'] .","
+                        . $params['bibliografiaAno'] .","
+                        . $params['bibliografiaVolume']. ","
+                        . $params['bibliografiaEditora']
+                .")";
+
+            $this->db->query( $query );
+
+            $query2 = "SELECT bibliografiaId FROM bibliografia WHERE bibliografiaTitulo=" . $params['bibliografiaTitulo'];
+            $resultquery = $this->db->query( $query2 );
+
+            if( $resultquery && ( $resultquery->num_rows != 0 ) ){
+                $resultquery->data_seek( 0 );
+                $result = $resultquery->fetch_array(MYSQLI_ASSOC);
+
+                $result["bibliografiaId"] =  "'".$result["bibliografiaId"]."'";
+
+                $query2 = "INSERT INTO `disciblibio` (
+                    `disciblibioId`, `disciplinaId`, 
+                    `bibliografiaId`, `disciblibioTipo`
+                    ) VALUES ( null,"
+                        . $this->disciplina["disciplinaId"] . ","
+                        . $result['bibliografiaId'] .","
+                        . $params['disciblibioTipo']
+                .")";
+                $this->db->query( $query2 );
+            }
         }
     }
 }
