@@ -104,6 +104,7 @@ class EventoModel extends MainModel{
 
     protected function getProf(){
         $query = 'SELECT 
+            professor.professorId,
             professor.professorNome,
             professor.professorFacebook,
             professor.professorLattes,

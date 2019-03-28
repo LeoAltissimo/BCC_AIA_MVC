@@ -105,19 +105,19 @@ if( $parametros ) {
         <div class="col-12 form-separator">
         <input type="hidden" name="distribcreditosId" value="<?php echo $creditos['distribcreditosId'] ?>">
             <select class="col-12 prof-input-text" name="distribcreditosTipo" placeholder="Tipo de Crédito">
-                <option value="0" <?php echo ($creditos["distribcreditosTipo"] == 0) ? ' selected' : null; ?>>
+                <option value="1" <?php echo ($creditos["distribcreditosTipo"] == 0) ? ' selected' : null; ?>>
                   Unidade Curricular I - Formação Geral e Humanística
                 </option>
-                <option value="1" <?php echo ($creditos["distribcreditosTipo"] == 1) ? ' selected' : null; ?>>
+                <option value="2" <?php echo ($creditos["distribcreditosTipo"] == 1) ? ' selected' : null; ?>>
                 Unidade Curricular II - Formação Específica 
                 </option>
-                <option value="2" <?php echo ($creditos["distribcreditosTipo"] == 2) ? ' selected' : null; ?>>
+                <option value="3" <?php echo ($creditos["distribcreditosTipo"] == 2) ? ' selected' : null; ?>>
                 Unidade Curricular III - Formação Complementar de Enriquecimento Créditos Eletivos Obrigatórios
                 </option>
-                <option value="3" <?php echo ($creditos["distribcreditosTipo"] == 3) ? ' selected' : null; ?>>
+                <option value="4" <?php echo ($creditos["distribcreditosTipo"] == 3) ? ' selected' : null; ?>>
                 Unidade Curricular III - Formação Complementar de Enriquecimento Créditos Eletivos Livres
                 </option>
-                <option value="4" <?php echo ($creditos["distribcreditosTipo"] == 4) ? ' selected' : null; ?>>
+                <option value="5" <?php echo ($creditos["distribcreditosTipo"] == 4) ? ' selected' : null; ?>>
                 Atividade Curricular Obrigatória
                 </option>
             </select>
@@ -321,19 +321,19 @@ update_output('#outputEmenta', '#editorEmenta');
         <div class="col-12 form-separator">
         <input type="hidden" name="distribcreditosId">
           <select class="col-12 prof-input-text" name="distribcreditosTipo" placeholder="Tipo de Crédito">
-                <option value="0">
+                <option value="1">
                   Unidade Curricular I - Formação Geral e Humanística
                 </option>
-                <option value="1">
+                <option value="2">
                 Unidade Curricular II - Formação Específica 
                 </option>
-                <option value="2">
+                <option value="3">
                 Unidade Curricular III - Formação Complementar de Enriquecimento Créditos Eletivos Obrigatórios
                 </option>
-                <option value="3">
+                <option value="4">
                 Unidade Curricular III - Formação Complementar de Enriquecimento Créditos Eletivos Livres
                 </option>
-                <option value="4">
+                <option value="5">
                 Atividade Curricular Obrigatória
                 </option>
             </select>

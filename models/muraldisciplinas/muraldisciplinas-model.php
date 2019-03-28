@@ -27,6 +27,8 @@ class MuraldisciplinasModel extends MainModel{
 
 		if( $querySemestre && ( $querySemestre->num_rows != 0 ) ){
 
+            $this->numSemestre = $querySemestre->num_rows;
+
 			for( $i = 0 ; $i < $querySemestre->num_rows; $i++){
                 $querySemestre->data_seek( $i );
                 $semestre = $querySemestre->fetch_array(MYSQLI_ASSOC);
@@ -46,6 +48,7 @@ class MuraldisciplinasModel extends MainModel{
                             
                             $this->listaDisciplinas[$i][$j]["disciplinaId"] = $linha[0];
                             $this->listaDisciplinas[$i][$j]["disciplinaNome"] = $linha[1];
+                            $this->listaDisciplinas[$i][$j]["disciplinaNomeReduzido"] = $title[0];
                 }
 
 			}

@@ -11,19 +11,19 @@ if ( ! defined('ABSPATH')) exit;
 			<h3 class="title-txt"><span>D</span>isciplinas</h3>
         <div class="diciplinasContainer">
         <?php
-        for( $i = 1 ; $i < count( $modeloDisciplinas->listaDisciplinas); $i++ ){ 
+        for( $i = 0 ; $i < count( $modeloDisciplinas->listaDisciplinas); $i++ ){ 
             if( isset($modeloDisciplinas->listaDisciplinas[$i]) ){
         ?>    
             <div class="col-md-4 exp-info-right">
 				<div class="ex-top">
-                    <h4><?php echo $i ;?>º Semestre</h4>
+                    <h4><?php echo $i + 1;?>º Semestre</h4>
                     
                     <?php
                         foreach( $modeloDisciplinas->listaDisciplinas[$i] as $value ) {
                     ?>
                             <li><span class="fa fa-check" aria-hidden="true"></span>
                                 <a href='<?php echo HOME_URI . '/disciplina/index/' . $value['disciplinaId'] ;?>'>
-                                    <?php echo $value["disciplinaNome"]; ?>
+                                    <?php echo $value["disciplinaNomeReduzido"]; ?>
                                 </a>
                             </li>
                     <?php

@@ -153,7 +153,9 @@ if ( ! defined('ABSPATH')) exit;
                     <div class="clearfix"></div>
                 </div>
                 <div class=" col-md-3 thumbnail team-w3agile">
-                    <img src="<?php echo HOME_URI. '/views/_images/' . $modeloEvento->professorOrganizador['professorTumb']; ?>.jpg" class="img-responsive" alt="">
+                <?php echo  "<a href='" .HOME_URI. '/docente/index/' . $modeloEvento->professorOrganizador["professorId"] . "'>" ?>    
+                    <img src="<?php echo HOME_URI. '/views/_images/' . $modeloEvento->professorOrganizador['professorTumb']; ?>" class="img-responsive" alt="">
+                </a>
                     <div class="team-info">
                         <div class="caption">
                             <h4><?php echo $modeloEvento->professorOrganizador['professorNome']; ?></h4>
@@ -176,12 +178,12 @@ if ( ! defined('ABSPATH')) exit;
                             <li class="list-group-item">Email: <?php echo "<a href='mailto:" . $modeloEvento->professorOrganizador['emailProfEmail'] . "'>" . $modeloEvento->professorOrganizador['emailProfEmail'] .
                                                                           "</a><br><a href='mailto:" . $modeloEvento->evento['eventoemailEmail'] . "'>" . $modeloEvento->evento['eventoemailEmail'] . "</a>"; ?></li>
                             <li class="list-group-item">Contato: <?php echo $modeloEvento->evento['eventotelTel']; ?></li>
-                            <li class="list-group-item">Endereço: <?php echo "Rua " . $modeloEvento->evento['eventoenderecoRua'] . 
-                                                                             ", " . $modeloEvento->evento['eventoenderecoNumero'] .
-                                                                             " - " . $modeloEvento->evento['eventoenderecoBairro'] .
-                                                                             ",<br>cidade: " . $modeloEvento->evento['eventoenderecoCidade'] . 
-                                                                             " - " . $modeloEvento->evento['eventoenderecoEstado']. 
-                                                                             "<br>CEP: " . $modeloEvento->evento['eventoenderecoCep']; ?></li>
+                            <li class="list-group-item">Endereço: <?php echo "Rua " . $modeloEvento->endereco['eventoenderecoRua'] . 
+                                                                             ", " . $modeloEvento->endereco['eventoenderecoNumero'] .
+                                                                             " - " . $modeloEvento->endereco['eventoenderecoBairro'] .
+                                                                             ",<br>cidade: " . $modeloEvento->endereco['eventoenderecoCidade'] . 
+                                                                             " - " . $modeloEvento->endereco['eventoenderecoEstado']. 
+                                                                             "<br>CEP: " . $modeloEvento->endereco['eventoenderecoCep']; ?></li>
                         </ul>
                     <div class="clearfix"></div>
                 </div>

@@ -35,7 +35,7 @@ class DisciplinaController extends MainController{
         $modeloMenu              = $this->load_model('menu/menu-model');
 		$modeloListaDisciplinas  = $this->load_model('muraldisciplinas/muraldisciplinas-model');
         $modelFooter             = $this->load_model('footer/footer-model');
-		
+
 		/** Carrega os arquivos do view **/
         require ABSPATH . '/views/_includes/header.php';
         require ABSPATH . '/views/_includes/menu.php';

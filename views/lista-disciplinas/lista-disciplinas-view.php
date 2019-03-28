@@ -11,12 +11,12 @@ if ( ! defined('ABSPATH')) exit;
 			<h3 class="title-txt"><span>D</span>isciplinas</h3>
             
         <?php
-        for( $i = 1 ; $i < count( $modeloListaDisciplinas->listaDisciplinas); $i++ ){ 
+        for( $i = 0 ; $i < count( $modeloListaDisciplinas->listaDisciplinas); $i++ ){ 
             if( isset($modeloListaDisciplinas->listaDisciplinas[$i]) ){
         ?>    
             <div class="col-md-4">
                 <div class="page-header">
-                    <h3 class="bars"><?php echo $i ;?>º Semestre</h3>
+                    <h3 class="bars"><?php echo $i + 1 ;?>º Semestre</h3>
                 </div>
                 <div class='well'>
                     <?php

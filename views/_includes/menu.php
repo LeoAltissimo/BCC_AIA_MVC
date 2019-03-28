@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a href='<?php echo HOME_URI;?>'>
-					<img alt='Logo Ciência da Computação' src='<?php echo HOME_URI;?>/views/_images/logo.jpg'>
+					<img id='img-logo' alt='Logo Ciência da Computação' src='<?php echo HOME_URI;?>/views/_images/logo.jpg'>
 				</a>
 			</div>
 			<!-- Botoes do Menu -->

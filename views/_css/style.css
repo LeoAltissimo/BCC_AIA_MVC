@@ -605,6 +605,13 @@ img.img-responsive {
 
 .navbar {
 	border-radius: 0!important;
+	display: flex;
+    justify-content: flex-start;
+}
+
+#img-logo {
+	height: 75px;
+	padding: 10px 0;
 }
 
 .navbar-brand {
@@ -672,7 +679,7 @@ ul.nav.navbar-nav li.active a::before {
 .navbar-nav,
 .header-top {
 	padding-right: 2.8em;
-	margin-top: 1.2em;
+	margin-top: 1em;
 }
 
 .header-nav {
