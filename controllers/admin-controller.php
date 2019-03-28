@@ -22,7 +22,9 @@ class AdminController extends MainController
 		
 		/** Carrega os arquivos do view **/
         require ABSPATH . '/views/admin/_includes/header.php';
-
+        require ABSPATH . '/views/admin/edit-curso/edit-curso-view.php';
+        //require ABSPATH . '/views/admin/lista-slide/lista-slide-view.php';
+        //require ABSPATH . '/views/admin/lista-galeria/lista-galeria-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';
 		
     }
@@ -46,7 +48,6 @@ class AdminController extends MainController
         require ABSPATH . '/views/_includes/header.php';
         require ABSPATH . '/views/_includes/menu.php';
         require ABSPATH . '/views/login-form/login-form-view.php';
-
         require ABSPATH . '/views/_includes/footer.php';
     }
 
