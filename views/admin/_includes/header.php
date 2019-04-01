@@ -54,6 +54,11 @@
     <div class="menu-container">
         <ul>
           <li>
+            <a class="main-menu-item" href='<?php echo HOME_URI . '/admin';?>'>
+            <i class="fas fa-cogs"></i></i> Geral
+            </a>
+          </li>
+          <li>
             <a class="main-menu-item" href='<?php echo HOME_URI . '/admin/professores/';?>'>
             <i class="fas fa-chalkboard-teacher"></i></i> Professores
             </a>

@@ -1191,6 +1191,14 @@ p.para-w3-agileits {
     line-height: 30px;
     margin-bottom: 2em;
 }
+h3.title-txt-wht {
+	text-align: center;
+    text-transform: capitalize;
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 1.5em;
+	letter-spacing: 2px;
+}
 h3.title-txt {
     text-align: center;
     text-transform: capitalize;
@@ -3058,3 +3066,8 @@ h3.title-txt {
 }
 
 /*--responsive--*/
+
+.evento {
+	background-color: #1E3953;
+    padding: 46px 15px;
+}

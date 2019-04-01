@@ -19,7 +19,6 @@ if( $parametros ) {
                     type="text" 
                     name="homeSlideTitulo" 
                     placeholder="Titulação" 
-                    required="required"
                     value=
                     "<?php 
                         echo $modeloSlides->slideConfig["homeSlideTitulo"] 
@@ -30,7 +29,7 @@ if( $parametros ) {
                     class="col-1 prof-input-text" 
                     type="color" 
                     name="homeSlideTituloCor" 
-                    placeholder="Cor"   
+                    placeholder="Cor"  
                     value=
                     "<?php 
                         echo $modeloSlides->slideConfig['homeSlideTituloCor'] 
@@ -86,7 +85,6 @@ var intervaulo = setInterval(() => {
                     type="text" 
                     name="homeSlideTitulo" 
                     placeholder="Titulação" 
-                    required="required"
                     value=""
                 />
                 <!-- Slide Color -->
@@ -95,7 +93,7 @@ var intervaulo = setInterval(() => {
                     type="color" 
                     name="homeSlideTituloCor" 
                     placeholder="Cor"   
-                    value=""
+                    value="#ffffff"
                 />
             </div>
         </div>

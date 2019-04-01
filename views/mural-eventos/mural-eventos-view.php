@@ -7,9 +7,9 @@ if ( ! defined('ABSPATH')) exit;
 	if( $modeloEvento->eventos ){ 
 ?>
 <!-- Mural de Eventos -->
-<div class="testimonials">
-		<div class="container">
-			<h3 class="title-txt"><span>E</span>ventos</h3>
+<div class="about">
+		<div class="container evento">
+			<h3 class="title-txt-wht">Eventos</h3>
 			<div class="col-md-6 testimonials-main">
 				<section class="slider">
 					<div class="flexslider">
@@ -21,13 +21,15 @@ if ( ! defined('ABSPATH')) exit;
 
 								<li>
 									<div class="inner-testimonials-w3ls">
+										<a href='<?php echo HOME_URI . '/evento/index/' . $evento['eventoId'] ;?>'>
 										<img src="<?php echo HOME_URI. '/views/_images/' . $evento['eventoCapa'];?>" alt="Capa evento <?php echo $evento['eventoNome'];?>" class="img-responsive" />
 										<div class="testimonial-info-wthree">
-											<a href='<?php echo HOME_URI . '/evento/index/' . $evento['eventoId'] ;?>'>
+											
 												<h5><?php echo $evento['eventoNome'];?></h5>
-												<span><?php echo "Início " . ($modeloEvento->inverte_data( $evento['eventoInicio'] )) . " término " . ($modeloEvento->inverte_data( $evento['eventoTermino'] ));?></span>
-											</a>
+												<span style="color: #fff"><?php echo "Início " . ($modeloEvento->inverte_data( $evento['eventoInicio'] )) . " término " . ($modeloEvento->inverte_data( $evento['eventoTermino'] ));?></span>
+											
 										</div>
+										</a>
 									</div>
 								</li>
 							

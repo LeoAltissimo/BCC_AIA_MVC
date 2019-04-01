@@ -17,7 +17,7 @@ if ( ! defined('ABSPATH')) exit;
 					<div class='slider-img1' style=' background-image: url(" . HOME_URI. "/views/_images/$slide[homeSlideCaminho])'  >
 						<div class='container'>
 							<div class='slider_banner_info_w3ls'>
-								<h4 style='color: #$cor'>$slide[homeSlideTitulo]</h4>
+								<h4 style='color: $cor'>$slide[homeSlideTitulo]</h4>
 							</div>
 						</div>
 					</div>

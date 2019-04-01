@@ -31,7 +31,7 @@
 			</div>	
 			</div>
 	</div>
-	<p class="copyright">©<?php echo date("Y"); ?> BCC-AIA. Bacharelado em Ciência da Computação | Unemat - Alto Araguaia. <br><sub>Desenvolvido por Leo Altíssimo Neto</sub></p>
+	<p class="copyright">©<?php echo date("Y"); ?> BCC-AIA. Bacharelado em Ciência da Computação | Unemat - Alto Araguaia. <br><sub><a href="https://github.com/LeoAltissimo">Desenvolvido por Leo Altíssimo Neto</a></sub></p>
 	<!-- //footer -->
 
 	<!-- Required Scripts -->

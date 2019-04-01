@@ -17,8 +17,8 @@ if ( ! defined('ABSPATH')) exit;
 
 				<div class="col-md-4 gallery-grids">
 					<div class="galry-img-agileinfo">
-						<a href="images/g2.jpg" class="swipebox" title=" <?php echo $value['muralFotoTitulo'];?> ">
-							<img class="img-responsive img-style row2" src="<?php echo HOME_URI. '/views/_images/' . $value['muralFotoCaminho'] . '.jpg';?>" alt="<?php echo $value['muralFotoTitulo'];?>"/> 
+						<a href="<?php echo HOME_URI. '/views/_images/' . $value['muralFotoCaminho'];?>" class="swipebox" title=" <?php echo $value['muralFotoTitulo'];?> ">
+							<img class="img-responsive img-style row2" src="<?php echo HOME_URI. '/views/_images/' . $value['muralFotoCaminho'];?>" alt="<?php echo $value['muralFotoTitulo'];?>"/> 
 						</a>
 					</div>
                 </div>
