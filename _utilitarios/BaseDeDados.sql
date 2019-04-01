@@ -268,3 +268,25 @@ CREATE TABLE IF NOT EXISTS `bccaia`.`muralfoto` (
   `muralFotoTitulo`      VARCHAR(128),
   PRIMARY KEY (`muralFotoId`)
 ) ENGINE = INNODB CHARSET = utf8 ;
+
+
+
+-- INSERE as tabelas raiz do sistema
+INSERT INTO IF NOT EXISTS `curso` (
+  `cursoId`, `cursoNome`, `cursoDescricao`
+  ) VALUES (2, '', NULL);
+
+INSERT INTO IF NOT EXISTS `emailcurso` (
+  `emailCursoId`, `cursoId`, `emailCursoEmail`
+  ) VALUES (NULL, 2, '');
+
+INSERT INTO IF NOT EXISTS `telcurso` (
+  `telCursoId`, `cursoId`, `telCursoTel`
+  ) VALUES (NULL, 2, '');
+
+INSERT INTO IF NOT EXISTS `enderecocurso` (
+  `enderecoCursoId`, `cursoId`, `enderecoCursoCep`, 
+  `enderecoCursoPais`, `enderecoCursoEstado`, `enderecoCursoCidade`, 
+  `enderecoCursoBairro`, `enderecoCursoRua`, `enderecoCursoNumero`, 
+  `enderecoCursoComplemento`
+  ) VALUES (NULL, 2, NULL, '', '', '', NULL, NULL, NULL, NULL)

@@ -8,7 +8,7 @@ if( $parametros ) {
         <h1><span class="first-letter">P</span>rofessores</h1>
     </div>
     <div>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
         <input type="hidden" name="professorId" value="<?php echo $modeloDocente->professor['professorId'] ?>">
         <div class="col-10">
             <div class="col-12 form-separator">
@@ -35,7 +35,7 @@ if( $parametros ) {
             <label id="inputBk" class="label">
                 <i id="inputTumbLabel" class="fas fa-camera"></i>
                 <span class="title">Adicionar Foto</span>
-                <input id="inputTumb" type="file" name="arquivo" type="file" value="<?php echo $modeloDocente->professor['professorTumb'] ?>"/>
+                <input id="inputTumb" type="file" name="arquivo" type="file"/>
             </label>
         </div>
         <div class="col-12 form-separator">

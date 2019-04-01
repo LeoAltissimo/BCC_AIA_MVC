@@ -6,7 +6,7 @@
 		<div class="f-bg-w3l">
 		<div class="col-md-4 w3layouts_footer_grid">
 					<h3>Sobre o Curso</h3>
-					<p><?php echo utf8_encode($modelFooter->sobre . "..."); ?></p>
+					<p><?php echo $modelFooter->sobre . "..."; ?></p>
 				</div>
 				<div class="col-md-4 w3layouts_footer_grid hpft">
 					<h3>Nosso contato</h3>

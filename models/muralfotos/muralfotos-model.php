@@ -7,6 +7,7 @@
  class MuralfotosModel extends MainModel{
 
     public $listaFotos = array( array() );
+    public $foto = array();
 
     public function __construct( $db = false, $controller = null ){
 
@@ -15,13 +16,22 @@
 		$this->parametros = $this->controller->parametros;
 		$this->userdata = $this->controller->userdata;
         
-        if(  !$this->getProfessores() )
+        if(  !$this->getMural() )
             $this->listaFotos = null;
+
+        if( isset($this->parametros[0]) )
+            $this->getFoto($this->parametros[0]);
+
     }
 
-    private function getProfessores(){
+    public function refresh(){
+        if( isset($this->parametros[0]) )
+            $this->getFoto($this->parametros[0]);
+    }
 
-        $query = "SELECT muralFotoCaminho, muralFotoTitulo FROM muralfoto";
+    private function getMural(){
+
+        $query = "SELECT * FROM muralfoto";
 
         $resultquery = $this->db->query( $query );
 
@@ -32,14 +42,52 @@
                 $linha = $resultquery->fetch_array(MYSQLI_ASSOC);
                 
 				foreach ($linha as $key => $value) {
-					if( is_string( $value ) )
-						$this->listaFotos[$i]["$key"] = utf8_encode ($value);
-					else
-						$this->listaFotos[$i]["$key"] = $value;
+					$this->listaFotos[$i]["$key"] = $value;
                 }
             }
 			return true;
 		}
         return false;
+    }
+
+    private function getFoto($id = NULL){
+        if( $id === NULL )
+            return false;
+
+        $query = "SELECT * FROM muralfoto WHERE muralFotoId=" . $id;
+
+		$queryResult = $this->db->query( $query );
+
+		if( $queryResult ){
+			$this->foto = $queryResult->fetch_array( MYSQLI_ASSOC );
+			return true;
+		}
+		return false;
+	}
+
+
+    public function setMural($params = NULL, $muralImg = NULL){ 
+        if( !isset( $params ) )
+            return false;
+
+		$params["muralFotoId"] = 		$params["muralFotoId"] ? 		"'".$params["muralFotoId"]."'" : 'null';
+		$params["muralFotoTitulo"] = 	$params["muralFotoTitulo"] ? 	"'".$params["muralFotoTitulo"]."'" : 'null';
+		$muralImg = $muralImg ? "'".$muralImg."'" : 'null';
+
+        if( $params["muralFotoId"] !== 'null' ) {
+            $query = "UPDATE muralFoto SET muralFotoTitulo=".$params["muralFotoTitulo"]
+                                         .", muralFotoCaminho=".$muralImg
+                                         ." WHERE muralFotoId=".$params["muralFotoId"];
+            $this->db->query( $query );
+        } else {
+            $query = "INSERT INTO `muralfoto` (`muralFotoId`, `muralFotoCaminho`, `muralFotoTitulo`)
+				VALUES( null," 
+				. $muralImg .","
+				. $params['muralFotoTitulo']
+				.")";
+
+            $this->db->query( $query );
+
+        }
     }
  }

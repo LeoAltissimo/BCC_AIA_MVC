@@ -16,6 +16,7 @@ define( 'DB_NAME', 'bccaia' );      // Nome do DB
 define( 'DB_USER', 'root' );        // Usuário do DB
 define( 'DB_PASSWORD', '' );        // Senha do DB
 define( 'DB_CHARSET', 'utf8' );     // Charset da conexão PDO
+define( 'CURSO_ID', 2 );            // id do curso na base
 
 define( 'DEBUG', true );           // Modo Debug
 

@@ -9,7 +9,7 @@
     </div>
     <div>
         <ul>
-        <?php foreach( $modeloEvento->eventos as $value ){ ?>
+        <?php if(   $modeloEvento->eventos !== NULL ) foreach( $modeloEvento->eventos as $value ){ ?>
             <li class="professor-item">
                 <div class="prof-container">
                     <img class="prof-thumb" src="<?php echo HOME_URI . "/views/_images/" . $value['eventoCapa']; ?>" alt="">

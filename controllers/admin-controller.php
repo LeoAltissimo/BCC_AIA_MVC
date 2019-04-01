@@ -18,15 +18,23 @@ class AdminController extends MainController
 
 		$this->title = 'DashBoard';
 		
-		$parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+        
+        $modeloCurso = $this->load_model('sobre/sobre-model');
+        $modeloSlides = $this->load_model('slider/slider-model');
+        $modeloMural = $this->load_model('muralfotos/muralfotos-model');
+
+        if( $_POST ){
+            $modeloCurso->setCurso($_POST);
+            $modeloCurso->refresh();
+        }
 		
 		/** Carrega os arquivos do view **/
         require ABSPATH . '/views/admin/_includes/header.php';
         require ABSPATH . '/views/admin/edit-curso/edit-curso-view.php';
-        //require ABSPATH . '/views/admin/lista-slide/lista-slide-view.php';
-        //require ABSPATH . '/views/admin/lista-galeria/lista-galeria-view.php';
+        require ABSPATH . '/views/admin/lista-slides/lista-slides-view.php';
+        require ABSPATH . '/views/admin/lista-mural-fotos/lista-mural-fotos-view.php';
         require ABSPATH . '/views/admin/_includes/footer.php';
-		
     }
 
     public function login() {
@@ -50,6 +58,99 @@ class AdminController extends MainController
         require ABSPATH . '/views/login-form/login-form-view.php';
         require ABSPATH . '/views/_includes/footer.php';
     }
+
+    //Carrega a página "/views/amdmin/slideEdit.php"
+    public function slideEdit() {
+
+        // Verifica se o usuário está logado
+        if ( ! $this->logged_in ) {
+            $this->logout();
+            $this->login();
+            return;
+        }
+
+        $this->title = 'Slide';
+        
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+
+        $modeloSlides = $this->load_model('slider/slider-model');
+
+
+        if( $_POST ) {
+            $nome_final = isset($_POST['homeSlideCaminho']) ? $_POST['homeSlideCaminho'] : NULL;
+            if( $_FILES) {
+                $_UP['pasta'] = './views/_images/';
+                $_UP['tamanho'] = 1024*1024*100; //5mb
+                $_UP['extensoes'] = array('jpg');
+
+                //Faz a verificação da extensao do arquivo
+                $extensao = explode('.', $_FILES['arquivo']['name']);
+                if( sizeof($extensao) === 2 )
+                    if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                        echo "ERROOOOUUU";
+                    } else if ($_UP['tamanho'] < $_FILES['arquivo']['size']){
+                        echo "ERROOOOUUU";
+                    } else {
+                        $nome_final = time().'.jpg';
+                        move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta']. $nome_final);
+                    }
+            }
+            $modeloSlides->setSlide($_POST, $nome_final);
+            $modeloSlides->refresh();
+        }
+
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/admin/_includes/header.php';
+        require ABSPATH . '/views/admin/edit-slide/edit-slide-view.php';
+        require ABSPATH . '/views/admin/_includes/footer.php';
+    }
+
+ //Carrega a página "/views/amdmin/muralEdit.php"
+ public function muralEdit() {
+
+    // Verifica se o usuário está logado
+    if ( ! $this->logged_in ) {
+        $this->logout();
+        $this->login();
+        return;
+    }
+
+    $this->title = 'Mural de Fotos';
+    
+    $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+
+    $modeloMural = $this->load_model('muralfotos/muralfotos-model');
+
+
+    if( $_POST ) {
+        $nome_final = isset($_POST['muralFotoCaminho']) ? $_POST['muralFotoCaminho'] : NULL;
+        if( $_FILES) {
+            $_UP['pasta'] = './views/_images/';
+            $_UP['tamanho'] = 1024*1024*100; //5mb
+            $_UP['extensoes'] = array('jpg');
+
+            //Faz a verificação da extensao do arquivo
+            $extensao = explode('.', $_FILES['arquivo']['name']);
+            if( sizeof($extensao) === 2 )
+                if(array_search($extensao[1], $_UP['extensoes']) === false) {		
+                    echo "ERROOOOUUU";
+                } else if ($_UP['tamanho'] < $_FILES['arquivo']['size']){
+                    echo "ERROOOOUUU";
+                } else {
+                    $nome_final = time().'.jpg';
+                    move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta']. $nome_final);
+                }
+        }
+        $modeloMural->setMural($_POST, $nome_final);
+        $modeloMural->refresh();
+    }
+
+    /** Carrega os arquivos do view **/
+    require ABSPATH . '/views/admin/_includes/header.php';
+    require ABSPATH . '/views/admin/edit-mural/edit-mural-view.php';
+    require ABSPATH . '/views/admin/_includes/footer.php';
+}
 
     //Carrega a página "/views/amdmin/professores.php"
     public function professores() {

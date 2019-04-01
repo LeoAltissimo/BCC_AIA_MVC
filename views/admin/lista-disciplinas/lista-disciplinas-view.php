@@ -10,6 +10,7 @@
     <div>
         <ul>
         <?php 
+        if(  $modeloDisciplinas->listaDisciplinas !== NULL ) 
         foreach($modeloDisciplinas->listaDisciplinas as $semestre ){ 
             foreach($semestre as $value){
         ?>

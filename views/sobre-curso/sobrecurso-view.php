@@ -10,7 +10,7 @@ if ( ! defined('ABSPATH')) exit;
 	<h3 class="title-txt"><span>O</span> Curso</h3>
 		<div class="ab-agile">
 			<div class="col-md-12 aboutleft1">
-				<p class="para1"><?php echo utf8_encode($modeloSobre->curso['cursoDescricao']); ?></p>
+				<p class="para1"><?php echo $modeloSobre->curso['cursoDescricao']; ?></p>
 			</div>
 			<div class="clearfix"></div>
 		</div>
