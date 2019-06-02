@@ -19,9 +19,9 @@ class SobreModel extends MainModel{
 
 		if( ! $this->getSobre() ) {
 			$this->curso = NULL;
-			$this->$email = NULL;
-			$this->$contato = NULL;
-			$this->$endereco = NULL;
+			$this->email = NULL;
+			$this->contato = NULL;
+			$this->endereco = NULL;
 		}
 		else {
 			$this->getEmail();
@@ -33,9 +33,9 @@ class SobreModel extends MainModel{
 	public function refresh() {
 		if( ! $this->getSobre() ) {
 			$this->curso = NULL;
-			$this->$email = NULL;
-			$this->$contato = NULL;
-			$this->$endereco = NULL;
+			$this->email = NULL;
+			$this->contato = NULL;
+			$this->endereco = NULL;
 		}
 		else {
 			$this->getEmail();
@@ -94,28 +94,28 @@ class SobreModel extends MainModel{
 	}
 
 	public function setCurso($params = NULL){ 
-        if( !$params )
+        if( !$params || !isset($params["cursoNome"]) )
             return false;
 
 		//curso
-		$params["cursoNome"] = 				  $params["cursoNome"] ? 				"'".$params["cursoNome"]."'" : 'null';
-		$params["cursoDescricao"] = 		  $params["cursoDescricao"] ? 			"'".$params["cursoDescricao"]."'" : 'null';
+		$params["cursoNome"] = 				  			$params["cursoNome"] ? 								"'".$params["cursoNome"]."'" : 'null';
+		$params["cursoDescricao"] = 		  		$params["cursoDescricao"] ? 					"'".$params["cursoDescricao"]."'" : 'null';
 		// emailcurso
-		$params["emailCursoId"] = 		  	  $params["emailCursoId"] ? 			"'".$params["emailCursoId"]."'" : 'null';
-		$params["emailCursoEmail"] = 		  $params["emailCursoEmail"] ? 			"'".$params["emailCursoEmail"]."'" : 'null';
+		$params["emailCursoId"] = 		  			$params["emailCursoId"] ? 						"'".$params["emailCursoId"]."'" : 'null';
+		$params["emailCursoEmail"] = 		  		$params["emailCursoEmail"] ? 					"'".$params["emailCursoEmail"]."'" : 'null';
 		// telcurso
-		$params["telCursoId"] = 		  	  $params["telCursoId"] ? 				"'".$params["telCursoId"]."'" : 'null';
-		$params["telCursoTel"] = 			  $params["telCursoTel"] ? 				"'".$params["telCursoTel"]."'" : 'null';
+		$params["telCursoId"] = 		  	  		$params["telCursoId"] ? 							"'".$params["telCursoId"]."'" : 'null';
+		$params["telCursoTel"] = 			  			$params["telCursoTel"] ? 							"'".$params["telCursoTel"]."'" : 'null';
 		//cursoendereco
-		$params["enderecoCursoId"] = 		  $params["enderecoCursoId"] ? 			"'".$params["enderecoCursoId"]."'" : 'null';
-		$params["enderecoCursoCep"] = 		  $params["enderecoCursoCep"] ? 		"'".$params["enderecoCursoCep"]."'" : 'null';
-		$params["enderecoCursoRua"] = 		  $params["enderecoCursoRua"] ? 		"'".$params["enderecoCursoRua"]."'" : 'null';
-		$params["enderecoCursoNumero"] = 	  $params["enderecoCursoNumero"] ? 		"'".$params["enderecoCursoNumero"]."'" : 'null';
-		$params["enderecoCursoBairro"] = 	  $params["enderecoCursoBairro"] ? 		"'".$params["enderecoCursoBairro"]."'" : 'null';
+		$params["enderecoCursoId"] = 		  		$params["enderecoCursoId"] ? 					"'".$params["enderecoCursoId"]."'" : 'null';
+		$params["enderecoCursoCep"] = 		  	$params["enderecoCursoCep"] ? 				"'".$params["enderecoCursoCep"]."'" : 'null';
+		$params["enderecoCursoRua"] = 		  	$params["enderecoCursoRua"] ? 				"'".$params["enderecoCursoRua"]."'" : 'null';
+		$params["enderecoCursoNumero"] = 	  	$params["enderecoCursoNumero"] ? 			"'".$params["enderecoCursoNumero"]."'" : 'null';
+		$params["enderecoCursoBairro"] = 	  	$params["enderecoCursoBairro"] ? 			"'".$params["enderecoCursoBairro"]."'" : 'null';
 		$params["enderecoCursoComplemento"] = $params["enderecoCursoComplemento"] ? "'".$params["enderecoCursoComplemento"]."'" : 'null';
-		$params["enderecoCursoCidade"] =	  $params["enderecoCursoCidade"] ? 		"'".$params["enderecoCursoCidade"]."'" : 'null';
-		$params["enderecoCursoEstado"] = 	  $params["enderecoCursoEstado"] ? 		"'".$params["enderecoCursoEstado"]."'" : 'null';
-		$params["enderecoCursoPais"] = 		  $params["enderecoCursoPais"] ? 		"'".$params["enderecoCursoPais"]."'" : 'null';
+		$params["enderecoCursoCidade"] =	  	$params["enderecoCursoCidade"] ? 			"'".$params["enderecoCursoCidade"]."'" : 'null';
+		$params["enderecoCursoEstado"] = 	  	$params["enderecoCursoEstado"] ? 			"'".$params["enderecoCursoEstado"]."'" : 'null';
+		$params["enderecoCursoPais"] = 		  	$params["enderecoCursoPais"] ? 				"'".$params["enderecoCursoPais"]."'" : 'null';
 
 		$query = "UPDATE curso SET cursoNome=".$params["cursoNome"]
 							   .", cursoDescricao=".$params["cursoDescricao"]

@@ -45,7 +45,7 @@
     <a href="#">
     <img class="navbar-brand-full" alt='Logo Ciência da Computação' src='<?php echo HOME_URI;?>/views/_images/logo.jpg' width="130">
     </a>
-    <a class="navbar-toggler sidebar-toggler d-md-down-none" href="#">
+    <a class="navbar-toggler sidebar-toggler d-md-down-none" href='<?php echo HOME_URI . '/admin/exit';?>'>
       <i class="fas fa-sign-out-alt"></i> Logout
     </a>
   </header>

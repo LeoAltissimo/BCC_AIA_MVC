@@ -5,7 +5,6 @@
  */
 class AdminController extends MainController
 {
-
 	//Carrega a página "/views/amdmin/index.php"
     public function index() {
 
@@ -24,7 +23,7 @@ class AdminController extends MainController
         $modeloSlides = $this->load_model('slider/slider-model');
         $modeloMural = $this->load_model('muralfotos/muralfotos-model');
 
-        if( $_POST ){
+        if($_POST){
             $modeloCurso->setCurso($_POST);
             $modeloCurso->refresh();
         }
@@ -38,6 +37,31 @@ class AdminController extends MainController
     }
 
     public function login() {
+
+        if( isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ){
+            $this->index();
+            return;
+        }
+            
+        $this->title = 'Login';
+    
+        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
+    
+        $modeloMenu =   $this->load_model('menu/menu-model');
+        $modelFooter       = $this->load_model('footer/footer-model');
+        $senhaIncorreta = false;
+        
+        /** Carrega os arquivos do view **/
+        require ABSPATH . '/views/_includes/header.php';
+        require ABSPATH . '/views/_includes/menu.php';
+        require ABSPATH . '/views/login-form/login-form-view.php';
+        require ABSPATH . '/views/_includes/footer.php';
+    }
+
+    public function exit() {
+        $this->logout();
+        $this->login();
+        return;
 
         if( isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ){
             $this->index();

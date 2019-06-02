@@ -149,7 +149,7 @@ if ( ! defined('ABSPATH')) exit;
         <div class="grid_3 grid_5 agile">
                 <h3>Contato</h3>
                 <div class=" col-md-5 map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30591910525!2d-74.25986432970718!3d40.697149422113014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sin!4v1518850482333"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.9321388216636!2d-53.21622848552565!3d-17.318823066901146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x937c9aad935629a1%3A0xfd6f0518555be7ca!2sUniversidade+do+Estado+de+Mato+Grosso%2C+Campus+Universit%C3%A1rio+de+Alto+Araguaia!5e0!3m2!1spt-BR!2sbr!4v1554089972464!5m2!1spt-BR!2sbr"></iframe>
                     <div class="clearfix"></div>
                 </div>
                 <div class=" col-md-3 thumbnail team-w3agile">

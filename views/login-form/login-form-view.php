@@ -13,7 +13,7 @@ if ( ! defined('ABSPATH')) exit;
 <div id="bk-login" class="col-md-12 login-view-container">
 <div class="col-md-4 contact-form">
     <h4 class="heading">Login</h4>
-    <form action="#" method="post">
+    <form action='<?php echo HOME_URI . '/admin';?>' method="post">
             <input type="text" placeholder="login" name="userdata[user]"/>
             <input type="password" placeholder="Senha" name="userdata[user_password]"/>
             <div class="submit1">
